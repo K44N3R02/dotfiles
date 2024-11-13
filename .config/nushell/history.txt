@@ -1,0 +1,80 @@
+quit
+exit
+exit 
+clear 
+^^clear 
+^clear 
+cd learn/ocaml/cs3110/
+ls
+code .
+dune exec ./exercise.exe
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+code .
+^vimtutor
+vimtutor
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+clear
+code .
+dune exec ./exercise3.exe
+utop
+nano .
+nano exercise3.ml
+utop
+nano exercise3.ml
+utop
+code .
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+^vimtutor
+exit
+code .
+dune exec ./exercise3.exe
+code .
+dune exec ./exercise3.exe
+ls
+mkdir chapter4
+file chapter4/map.ml
+touch chapter4/map.ml
+tree
+^clear 
+code .
+utop

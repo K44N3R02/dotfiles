@@ -1,0 +1,20 @@
+{
+  "ProjectName": "test",
+  "BuildVersion": "1.0.2",
+  "CreationTime": "2024-10-15T22:17:46.466065+03:00",
+  "AllCreatedChips": [
+    "OR",
+    "Half Adder"
+  ],
+  "StarredChips": [
+    "AND",
+    "NOT",
+    "OR",
+    "Half Adder"
+  ],
+  "DisplayOptions": {
+    "MainChipPinNameDisplayMode": 0,
+    "SubChipPinNameDisplayMode": 1,
+    "ShowCursorGuide": 1
+  }
+}

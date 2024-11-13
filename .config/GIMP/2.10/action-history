@@ -1,0 +1,9 @@
+# GIMP action-history
+
+(history-item "image-new" 0)
+(history-item "file-quit" 2)
+(history-item "tools-pencil" 0)
+(history-item "tools-paintbrush" 0)
+(history-item "tools-zoom" 1)
+
+# end of action-history
