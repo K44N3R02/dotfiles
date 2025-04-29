@@ -1,0 +1,49 @@
+# Brews
+brew "clang-format"
+brew "fzf"
+brew "go@1.24"
+brew "hexedit"
+brew "jq"
+#brew "kanata"
+#cargo install kanata
+#cd ~/.cargo/registry/src/index.crates.io-{something}/kanata-1.8.1
+#cargo install --features cmd --path . --offline
+brew "neovim"
+#brew "python@3.13"
+brew "rust"
+brew "ripgrep"
+brew "sc-im"
+brew "tmux"
+brew "yt-dlp"
+brew "zig"
+
+# Casks
+cask "anki"
+cask "bitwarden"
+cask "brave-browser"
+cask "ghostty"
+cask "hammerspoon"
+cask "iina"
+cask "karabiner-elements"
+cask "kitty"
+cask "libreoffice"
+cask "obsidian"
+#cask "pearcleaner"
+cask "rectangle"
+cask "font-sf-mono"
+cask "font-sf-pro"
+cask "sf-symbols"
+cask "telegram-desktop"
+cask "the-unarchiver"
+cask "vscodium"
+cask "whatsapp"
+cask "zotero"
+
+# Taps
+tap "nikitabobko/tap"
+cask "aerospace"
+
+tap "FelixKratz/formulae"
+brew "sketchybar"
+brew "borders"
+brew "svim"
