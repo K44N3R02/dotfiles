@@ -24,6 +24,10 @@ vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
+-- Easier home/end
+vim.keymap.set({ 'n', 'v' }, 'H', '_')
+vim.keymap.set({ 'n', 'v' }, 'L', '$')
+
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --
@@ -61,14 +65,14 @@ vim.keymap.set('n', 'x', '"_x')
 vim.keymap.set('v', 'x', '"_x')
 
 -- Yank to system clipboard (ThePrimeagen)
-vim.keymap.set('n', '<leader>y', '"+y')
-vim.keymap.set('v', '<leader>y', '"+y')
-vim.keymap.set('n', '<leader>Y', '"+Y')
+-- vim.keymap.set('n', '<leader>y', '"+y')
+-- vim.keymap.set('v', '<leader>y', '"+y')
+-- vim.keymap.set('n', '<leader>Y', '"+Y')
 
 -- Paste from system clipboard
-vim.keymap.set('n', '<leader>p', '"+p')
-vim.keymap.set('v', '<leader>p', '"+p')
-vim.keymap.set('n', '<leader>P', '"+P')
+-- vim.keymap.set('n', '<leader>p', '"+p')
+-- vim.keymap.set('v', '<leader>p', '"+p')
+-- vim.keymap.set('n', '<leader>P', '"+P')
 
 -- Unmap `s` because i don't like it
 vim.keymap.set('n', 's', '<nop>')

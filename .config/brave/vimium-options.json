@@ -1,0 +1,6 @@
+{
+  "keyMappings": "# Insert your preferred key mappings here.\nmap J nextTab\nmap K previousTab",
+  "linkHintCharacters": "asdfghjklmnvc",
+  "grabBackFocus": true,
+  "settingsVersion": "2.2.1"
+}

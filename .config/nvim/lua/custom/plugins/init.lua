@@ -279,4 +279,11 @@ return {
       end, { desc = 'Open directory in new split' })
     end,
   },
+
+  {
+    'rhysd/vim-clang-format',
+    config = function()
+      vim.keymap.set('n', '<leader>cf', ':ClangFormat<CR>', { noremap = true, silent = true })
+    end,
+  },
 }

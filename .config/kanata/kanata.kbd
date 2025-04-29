@@ -1,9 +1,24 @@
 (defcfg
+  danger-enable-cmd yes
   process-unmapped-keys yes
 )
-(defsrc
-  a   s   d   f   j   k   l   ;
+
+(platform (macos)
+  (defoverrides
+    (lmet bspc) (lalt bspc)
+    (lsft bspc) (del)
+  )
 )
+
+(defsrc
+       f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    ret
+  caps a    s    d    f    g    h    j    k    l    ;    '    \
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+                           spc
+)
+
 (defvar
   tap-time 300
   hold-time 225
@@ -19,16 +34,83 @@
     n m , . /
   )
 )
+
 (deflayer base
-  @a  @s  @d  @f  @j  @k  @l  @;
+       brdn bru  _    _    _    _    prev pp   next mute vold volu
+  grv  _    _    _    _    _    _    _    _    _    _    _    _    _
+  @tab _    _    _    _    _    _    _    _    _    _    _    _    _
+  @cap @a   @s   @d   @f   _    _    @j   @k   @l   @;   _    _
+  lsft _    _    _    _    _    _    _    _    _    _    rsft
+                           spc
 )
 
 (deflayer nomods
-  a   s   d   f   j   k   l   ;
+       _    _    _    _    _    _    _    _    _    _    _    _
+  grv  _    _    _    _    _    _    _    _    _    _    _    _    _
+  @tab _    _    _    _    _    _    _    _    _    _    _    _    _
+  @cap a    s    d    f    _    _    j    k    l    ;    _    _
+  lsft _    _    _    _    _    _    _    _    _    _    rsft
+                           spc
 )
+
+(deflayer numbers
+       _    _    _    _    _    _    _    _    _    _    _    _
+  grv  _    _    _    _    _    _    _    _    _    _    _    _    _
+  tab  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _
+  spc  @1   @2   @3   @4   5    6    @7   @8   @9   @0   -    =
+  lsft _    _    _    _    _    _    _    _    _    _    rsft
+                           _
+)
+
+(deflayer navigation
+       _    _    _    _    _    _    _    _    _    _    _    _
+  grv  _    _    _    _    _    _    _    _    _    _    _    _    _
+  @tab _    _    _    _    _    _    _    _    _    _    home end  _
+  @bas lmet lalt lsft lctl _    left down up   rght _    _    _
+  lsft _    _    _    _    _    _    _    _    _    _    rsft
+                           _
+)
+
+(deflayer desktop
+       _    _    _    _    _    _    _    _    _    _    _    _
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
+  _    @q   @w   @e   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   lrld
+  lsft XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   rsft
+                           XX
+)
+
+(deflayer apps
+       _    _    _    _    _    _    _    _    _    _    _    _
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
+  _    XX   XX   _    XX   XX   XX   @ank @obs @zot XX   XX   XX   XX
+  XX   XX   XX   XX   XX   XX   @set @brw @kty XX   XX   XX   XX
+  lsft XX   XX   XX   XX   XX   @cal @mai @wsp XX   XX   rsft
+                           XX
+)
+
+(deflayer tiling
+       _    _    _    _    _    _    _    _    _    _    _    _
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
+  _    XX   _    XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
+  XX   XX   XX   XX   XX   XX   @fl  @fd  @fu  @fr  @srv XX   XX
+  lsft XX   XX   XX   XX   XX   XX   @max @acr XX   @tls rsft
+                           @ws
+)
+
+(deflayer arrange
+       _    _    _    _    _    _    _    _    _    _    _    _
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
+  _    _    XX   XX   XX   XX   XX   @rs- @rs+ XX   XX   XX   XX   XX
+  XX   XX   XX   XX   XX   XX   @ml  @md  @mu  @mr  XX   XX   XX
+  lsft XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   rsft
+                           XX
+)
+
 (deffakekeys
   to-base (layer-switch base)
 )
+
 (defalias
   tap (multi
     (layer-switch nomods)
@@ -43,4 +125,51 @@
   k (tap-hold-release-keys $tap-time $hold-time (multi k @tap) rsft $right-hand-keys)
   l (tap-hold-release-keys $tap-time $hold-time (multi l @tap) ralt $right-hand-keys)
   ; (tap-hold-release-keys $tap-time $hold-time (multi ; @tap) rmet $right-hand-keys)
+
+  1 (tap-hold-release-keys $tap-time $hold-time (multi 1 @tap) lmet $left-hand-keys)
+  2 (tap-hold-release-keys $tap-time $hold-time (multi 2 @tap) lalt $left-hand-keys)
+  3 (tap-hold-release-keys $tap-time $hold-time (multi 3 @tap) lsft $left-hand-keys)
+  4 (tap-hold-release-keys $tap-time $hold-time (multi 4 @tap) lctl $left-hand-keys)
+  7 (tap-hold-release-keys $tap-time $hold-time (multi 7 @tap) rctl $right-hand-keys)
+  8 (tap-hold-release-keys $tap-time $hold-time (multi 8 @tap) rsft $right-hand-keys)
+  9 (tap-hold-release-keys $tap-time $hold-time (multi 9 @tap) ralt $right-hand-keys)
+  0 (tap-hold-release-keys $tap-time $hold-time (multi 0 @tap) rmet $right-hand-keys)
+
+  bas (layer-switch base)
+  num (layer-switch numbers)
+  nav (layer-switch navigation)
+
+  cap (tap-hold-press $tap-time $hold-time esc (layer-while-held navigation))
+
+  tab (tap-hold-press $tap-time $hold-time tab (layer-while-held desktop))
+
+  q (layer-while-held arrange)
+  ml C-A-S-h
+  mr C-A-S-l
+  mu C-A-S-k
+  md C-A-S-j
+  rs- C-A-S-min
+  rs+ C-A-S-=
+
+  w (layer-while-held tiling)
+  fl C-A-h
+  fr C-A-l
+  fu C-A-k
+  fd C-A-j
+  srv C-A-;
+  tls C-A-/
+  acr C-A-,
+  max C-A-S-f
+  ws C-A-S-w
+
+  e (layer-while-held apps)
+  set (cmd open -a "System Settings.app")
+  brw (cmd open -a "Brave Browser.app")
+  kty (cmd open -a "kitty.app")
+  obs (cmd open -a "Obsidian.app")
+  ank (cmd open -a "Anki.app")
+  zot (cmd open -a "Zotero.app")
+  cal (cmd open -a "Calculator.app")
+  mai (cmd open -a "Mail.app")
+  wsp (cmd open -a "Whatsapp.app")
 )

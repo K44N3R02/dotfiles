@@ -46,3 +46,43 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave'
     end
   end,
 })
+
+-- Autoformat C code
+vim.api.nvim_create_autocmd('BufWritePre', {
+  desc = 'Format C files on save with clang-format',
+  group = vim.api.nvim_create_augroup('clang-format-autoformat', { clear = true }),
+  pattern = '*.c,*.h',
+  callback = function()
+    vim.cmd 'ClangFormat'
+  end,
+})
+
+local c_linux_kernel_tabs = vim.api.nvim_create_augroup('c-linux-kernel-tabs', { clear = true })
+
+-- Tab length to 8 spaces for C files
+-- Set tab length to 8 spaces for C files
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'Set tab length to 8 spaces for C files',
+  group = c_linux_kernel_tabs,
+  pattern = 'c',
+  callback = function()
+    vim.opt.tabstop = 8 -- Number of spaces that a <Tab> counts for
+    vim.opt.softtabstop = 8 -- Number of spaces that a <Tab> counts for while editing
+    vim.opt.shiftwidth = 8 -- Number of spaces to use for each step of (auto)indent
+    vim.opt.expandtab = false -- Use actual tab characters instead of spaces
+  end,
+})
+
+-- Tab length to 8 spaces for Makefile
+-- Set tab length to 8 spaces for Makefile
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'Set tab length to 8 spaces for Makefile',
+  group = c_linux_kernel_tabs,
+  pattern = 'make',
+  callback = function()
+    vim.opt.tabstop = 8 -- Number of spaces that a <Tab> counts for
+    vim.opt.softtabstop = 8 -- Number of spaces that a <Tab> counts for while editing
+    vim.opt.shiftwidth = 8 -- Number of spaces to use for each step of (auto)indent
+    vim.opt.expandtab = false -- Use actual tab characters instead of spaces
+  end,
+})
