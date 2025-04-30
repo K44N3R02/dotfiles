@@ -2,7 +2,7 @@ theme = rose-pine
 font-family = jetbrains mono
 font-size = 20
 
-command = /opt/homebrew/bin/tmux new-session -s '~' -A || /usr/bin/tmux new-session -s '~' -A
+command = "/opt/homebrew/bin/tmux new-session -s k44n -A"
 
 macos-option-as-alt = true
 macos-titlebar-style = hidden

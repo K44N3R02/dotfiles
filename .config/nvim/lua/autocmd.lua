@@ -64,7 +64,7 @@ local c_linux_kernel_tabs = vim.api.nvim_create_augroup('c-linux-kernel-tabs', {
 vim.api.nvim_create_autocmd('FileType', {
   desc = 'Set tab length to 8 spaces for C files',
   group = c_linux_kernel_tabs,
-  pattern = 'c',
+  pattern = { 'c', 'h' },
   callback = function()
     vim.opt.tabstop = 8 -- Number of spaces that a <Tab> counts for
     vim.opt.softtabstop = 8 -- Number of spaces that a <Tab> counts for while editing

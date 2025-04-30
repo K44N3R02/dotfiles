@@ -1,4 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
+PATH="/opt/homebrew/bin:$PATH"
+
 switch_to() {
     if [[ -z $TMUX ]]; then
         tmux attach-session -t $1
@@ -24,7 +27,7 @@ if [[ $# -eq 1 ]]; then
 else
     # If someone wants to make this extensible, i'll accept
     # PR
-    selected=$(find ~/ ~/learn ~/.config ~/odtu -mindepth 1 -maxdepth 1 -type d | fzf)
+    selected=$((echo "/Users/k44n"; find ~/ ~/learn/** ~/.config ~/odtu/** -mindepth 1 -maxdepth 1 -type d) | fzf)
 fi
 
 if [[ -z $selected ]]; then

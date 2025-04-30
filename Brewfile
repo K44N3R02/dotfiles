@@ -1,5 +1,6 @@
 # Brews
 brew "clang-format"
+brew "cmus"
 brew "fzf"
 brew "go@1.24"
 brew "hexedit"
