@@ -49,9 +49,9 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave'
 
 -- Autoformat C code
 vim.api.nvim_create_autocmd('BufWritePre', {
-  desc = 'Format C files on save with clang-format',
+  desc = 'Format C and C++ files on save with clang-format',
   group = vim.api.nvim_create_augroup('clang-format-autoformat', { clear = true }),
-  pattern = '*.c,*.h',
+  pattern = '*.c,*.h,*.cpp,*.hpp,*.cc,*.hh',
   callback = function()
     vim.cmd 'ClangFormat'
   end,
@@ -62,9 +62,9 @@ local c_linux_kernel_tabs = vim.api.nvim_create_augroup('c-linux-kernel-tabs', {
 -- Tab length to 8 spaces for C files
 -- Set tab length to 8 spaces for C files
 vim.api.nvim_create_autocmd('FileType', {
-  desc = 'Set tab length to 8 spaces for C files',
+  desc = 'Set tab length to 8 spaces for C and C++ files',
   group = c_linux_kernel_tabs,
-  pattern = { 'c', 'h' },
+  pattern = { 'c', 'cpp' },
   callback = function()
     vim.opt.tabstop = 8 -- Number of spaces that a <Tab> counts for
     vim.opt.softtabstop = 8 -- Number of spaces that a <Tab> counts for while editing
