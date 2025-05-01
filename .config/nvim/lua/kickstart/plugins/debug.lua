@@ -30,20 +30,29 @@ return {
     local dapui = require 'dapui'
     return {
       -- Basic debugging keymaps, feel free to change to your liking!
-      { '<F5>', dap.continue, desc = 'Debug: Start/Continue' },
-      { '<F1>', dap.step_into, desc = 'Debug: Step Into' },
-      { '<F2>', dap.step_over, desc = 'Debug: Step Over' },
-      { '<F3>', dap.step_out, desc = 'Debug: Step Out' },
-      { '<leader>b', dap.toggle_breakpoint, desc = 'Debug: Toggle Breakpoint' },
+      { '\\c', dap.continue, desc = 'Debug: Start/Continue' },
+      { '\\i', dap.step_into, desc = 'Debug: Step Into' },
+      { '\\s', dap.step_over, desc = 'Debug: Step Over (skip)' },
+      { '\\o', dap.step_out, desc = 'Debug: Step Out' },
+      { '\\b', dap.toggle_breakpoint, desc = 'Debug: Toggle Breakpoint' },
       {
-        '<leader>B',
+        '\\B',
         function()
           dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
         end,
         desc = 'Debug: Set Breakpoint',
       },
       -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-      { '<F7>', dapui.toggle, desc = 'Debug: See last session result.' },
+      { '\\\\', dapui.toggle, desc = 'Debug: See last session result.' },
+      { '\\g', dap.run_to_cursor, desc = 'Debug: Run to Cursor' },
+      -- Eval var under the cursor
+      {
+        '\\?',
+        function()
+          dapui.eval(nil, { enter = true })
+        end,
+        desc = 'Debug: Show the value of variable under the cursor.',
+      },
       unpack(keys),
     }
   end,
@@ -67,6 +76,16 @@ return {
         name = 'Launch File',
         program = '${workspaceFolder}/zig-out/bin/zox',
         cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+        args = {},
+      },
+    }
+
+    dap.configurations.c = {
+      {
+        type = 'lldb',
+        request = 'launch',
+        name = 'Launch File',
         stopOnEntry = false,
         args = {},
       },
