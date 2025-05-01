@@ -81,6 +81,7 @@ alias bbic='brew update && brew bundle install --cleanup --file=~/Brewfile && br
 alias ls='ls --color'
 alias vv='nvim .'
 alias v='nvim'
+alias c='clear'
 alias kanata_err='sudo tail /Library/Logs/Kanata/kanata.err.log'
 alias kanata_out='sudo tail /Library/Logs/Kanata/kanata.out.log'
 
