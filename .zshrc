@@ -82,8 +82,9 @@ alias ls='ls --color'
 alias vv='nvim .'
 alias v='nvim'
 alias c='clear'
-alias kanata_err='sudo tail /Library/Logs/Kanata/kanata.err.log'
-alias kanata_out='sudo tail /Library/Logs/Kanata/kanata.out.log'
+alias k='sudo kanata -c ~/.config/kanata/kanata.kbd'
+alias zi='__zoxide_zi'
 
 # Shell integrations
 eval "$(fzf --zsh)"
+eval "$(zoxide init zsh)"
