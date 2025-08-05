@@ -276,7 +276,7 @@ return {
         },
       }
       vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
-      vim.keymap.set('n', '<leader>o', function()
+      vim.keymap.set('n', '<leader><CR>', function()
         oil.select { vertical = true }
       end, { desc = 'Open directory in new split' })
     end,
@@ -285,7 +285,95 @@ return {
   {
     'rhysd/vim-clang-format',
     config = function()
-      vim.keymap.set('n', '<leader>cf', ':ClangFormat<CR>', { noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>cf', '<CMD>ClangFormat<CR>', { noremap = true, silent = true })
+    end,
+  },
+
+  {
+    'epwalsh/obsidian.nvim',
+    version = '*',
+    lazy = true,
+    event = {
+      -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+      -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
+      -- refer to `:h file-pattern` for more examples
+      'BufReadPre '
+        .. vim.fn.expand '~'
+        .. '/vaults/*.md',
+      'BufNewFile ' .. vim.fn.expand '~' .. '/vaults/*.md',
+    },
+    dependencies = {
+      -- Required.
+      'nvim-lua/plenary.nvim',
+      -- for completion
+      'hrsh7th/nvim-cmp',
+      -- for search and quick switch
+      'nvim-telescope/telescope.nvim',
+      -- for syntax highlighting
+      'nvim-treesitter/nvim-treesitter',
+    },
+    config = function()
+      local obsidian = require 'obsidian'
+      obsidian.setup {
+        workspaces = {
+          {
+            name = 'personal',
+            path = '~/vaults/personal',
+          },
+          {
+            name = 'metu',
+            path = '~/vaults/metu',
+          },
+          { -- hopefully someday will be useful
+            name = 'work',
+            path = '~/vaults/work',
+          },
+        },
+        ---@diagnostic disable-next-line: missing-fields
+        completion = {
+          nvim_cmp = true,
+          min_chars = 2,
+        },
+        prepend_note_id = true,
+        note_id_func = function(title)
+          local suffix = ''
+          if title ~= nil then
+            -- If title is given, transform it into valid file name.
+            suffix = title:gsub(' ', '-'):gsub('[^A-Za-z0-9-]', ''):lower()
+          else
+            -- If title is nil, just add 4 random uppercase letters to the suffix.
+            for _ = 1, 4 do
+              suffix = suffix .. string.char(math.random(65, 90))
+            end
+          end
+          return suffix
+        end,
+        ---@diagnostic disable-next-line: missing-fields
+        templates = {
+          folder = '~/vaults/templates',
+          date_format = '%Y/%m/%d %a',
+          time_format = '%H:%M',
+          substitutions = {
+            title = function()
+              return vim.fn.input 'Enter title: '
+            end,
+            clipboard = function()
+              return vim.fn.getreg '+'
+            end,
+          },
+        },
+        ---@diagnostic disable-next-line: missing-fields
+        picker = {
+          -- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', or 'mini.pick'.
+          name = 'telescope.nvim',
+        },
+      }
+      vim.keymap.set('n', '<leader>oo', '<CMD>ObsidianOpen<CR>', { desc = '[O]bsidian [O]pen' })
+      vim.keymap.set('n', '<leader>onn', '<CMD>ObsidianNew<CR>', { desc = '[O]bsidian [N]ew' })
+      vim.keymap.set('n', '<leader>ont', '<CMD>ObsidianNewFromTemplate<CR><CR>', { desc = '[O]bsidian [N]ew From [T]emplate' })
+      vim.keymap.set('n', '<leader>ob', '<CMD>ObsidianBacklinks<CR>', { desc = '[O]bsidian [B]acklinks' })
+      vim.keymap.set('n', '<leader>ot', '<CMD>ObsidianTags<CR>', { desc = '[O]bsidian [T]ags' })
+      vim.keymap.set('n', '<leader>ol', '<CMD>ObsidianLinks<CR>', { desc = '[O]bsidian [L]inks' })
     end,
   },
 }

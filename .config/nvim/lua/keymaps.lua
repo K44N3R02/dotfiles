@@ -3,6 +3,8 @@
 
 -- NOTE: leader is defined at root file
 
+vim.keymap.set({ 'i', 'v', 'x' }, '<C-c>', '<Esc>')
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -19,10 +21,10 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
-vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+--vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+--vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+--vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+--vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Easier home/end
 vim.keymap.set({ 'n', 'v' }, 'H', '_')
@@ -75,4 +77,4 @@ vim.keymap.set('v', 'x', '"_x')
 -- vim.keymap.set('n', '<leader>P', '"+P')
 
 -- Unmap `s` because i don't like it
-vim.keymap.set('n', 's', '<nop>')
+vim.keymap.set({ 'n', 'v' }, 's', '<nop>')

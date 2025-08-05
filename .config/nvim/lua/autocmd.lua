@@ -61,28 +61,37 @@ local c_linux_kernel_tabs = vim.api.nvim_create_augroup('c-linux-kernel-tabs', {
 
 -- Tab length to 8 spaces for C files
 -- Set tab length to 8 spaces for C files
-vim.api.nvim_create_autocmd('FileType', {
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
   desc = 'Set tab length to 8 spaces for C and C++ files',
   group = c_linux_kernel_tabs,
-  pattern = { 'c', 'cpp' },
+  pattern = '*/learn/*.{c,cpp,h,hpp,cc,hh}',
   callback = function()
-    vim.opt.tabstop = 8 -- Number of spaces that a <Tab> counts for
-    vim.opt.softtabstop = 8 -- Number of spaces that a <Tab> counts for while editing
-    vim.opt.shiftwidth = 8 -- Number of spaces to use for each step of (auto)indent
-    vim.opt.expandtab = false -- Use actual tab characters instead of spaces
+    vim.bo.tabstop = 8 -- Number of spaces that a <Tab> counts for
+    vim.bo.softtabstop = 8 -- Number of spaces that a <Tab> counts for while editing
+    vim.bo.shiftwidth = 8 -- Number of spaces to use for each step of (auto)indent
+    vim.bo.expandtab = false -- Use actual tab characters instead of spaces
   end,
 })
 
 -- Tab length to 8 spaces for Makefile
 -- Set tab length to 8 spaces for Makefile
-vim.api.nvim_create_autocmd('FileType', {
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
   desc = 'Set tab length to 8 spaces for Makefile',
   group = c_linux_kernel_tabs,
-  pattern = 'make',
+  pattern = '*/learn/*/Makefile',
   callback = function()
-    vim.opt.tabstop = 8 -- Number of spaces that a <Tab> counts for
-    vim.opt.softtabstop = 8 -- Number of spaces that a <Tab> counts for while editing
-    vim.opt.shiftwidth = 8 -- Number of spaces to use for each step of (auto)indent
-    vim.opt.expandtab = false -- Use actual tab characters instead of spaces
+    vim.bo.tabstop = 8 -- Number of spaces that a <Tab> counts for
+    vim.bo.softtabstop = 8 -- Number of spaces that a <Tab> counts for while editing
+    vim.bo.shiftwidth = 8 -- Number of spaces to use for each step of (auto)indent
+    vim.bo.expandtab = false -- Use actual tab characters instead of spaces
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'Set conceal level to 2 for Markdown files',
+  group = vim.api.nvim_create_augroup('markdown-conceallevel', { clear = true }),
+  pattern = 'markdown',
+  callback = function()
+    vim.opt.conceallevel = 2
   end,
 })

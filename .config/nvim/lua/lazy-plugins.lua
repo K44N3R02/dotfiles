@@ -26,20 +26,9 @@ require('lazy').setup({
 
   require 'kickstart.plugins.telescope',
 
+  require 'kickstart.plugins.lua-lsp',
+
   -- LSP Plugins
-  {
-    -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
-    -- used for completion, annotations and signatures of Neovim apis
-    'folke/lazydev.nvim',
-    ft = 'lua',
-    opts = {
-      library = {
-        -- Load luvit types when the `vim.uv` word is found
-        { path = 'luvit-meta/library', words = { 'vim%.uv' } },
-      },
-    },
-  },
-  { 'Bilal2453/luvit-meta', lazy = true },
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
@@ -200,8 +189,6 @@ require('lazy').setup({
         basedpyright = {},
         rust_analyzer = {},
         nil_ls = {},
-        ruby_lsp = {},
-        rubyfmt = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -310,7 +297,10 @@ require('lazy').setup({
           end,
         },
         completion = { completeopt = 'menu,menuone,noinsert' },
-
+        window = {
+          completion = cmp.config.window.bordered {},
+          documentation = cmp.config.window.bordered {},
+        },
         -- For an understanding of why these mappings were
         -- chosen, you will need to read `:help ins-completion`
         --
