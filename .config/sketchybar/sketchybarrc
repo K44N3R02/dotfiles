@@ -1,80 +1,104 @@
 #!/bin/bash
-# This is a demo config to showcase some of the most important commands.
-# It is meant to be changed and configured, as it is intentionally kept sparse.
-# For a (much) more advanced configuration example see my dotfiles:
-# https://github.com/FelixKratz/dotfiles
+# https://github.com/forteleaf/sketkchybar-with-aerospace/
 
-PLUGIN_DIR="$CONFIG_DIR/plugins"
-ITEM_DIR="$CONFIG_DIR/items"
-FONT="SF Mono"
+config_dir="~/.config/sketchybar/"
 
-source "$CONFIG_DIR/colors.sh"
+source "$CONFIG_DIR/colors.sh" # Loads all defined colors
+source "$CONFIG_DIR/icons.sh" # Loads all defined icons
 
-##### Bar Appearance #####
-# Configuring the general appearance of the bar.
-# These are only some of the options available. For all options see:
-# https://felixkratz.github.io/SketchyBar/config/bar
-# If you are looking for other colors, see the color picker:
-# https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
+ITEM_DIR="$CONFIG_DIR/items" # Directory where the items are configured
+PLUGIN_DIR="$CONFIG_DIR/plugins" # Directory where all the plugin scripts are stored
 
-sketchybar --bar position=top height=32 blur_radius=30 color=$BAR_COLOR
+FONT="SF Mono" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
+PADDINGS=3 # All paddings use this value (icon, label, background)
 
-##### Changing Defaults #####
-# We now change some default values, which are applied to all further items.
-# For a full list of all available item properties see:
-# https://felixkratz.github.io/SketchyBar/config/items
+# aerospace setting
+AEROSPACE_FOCUSED_MONITOR_NO=$(aerospace list-workspaces --focused)
+AEROSPACE_LIST_OF_WINDOWS_IN_FOCUSED_MONITOR=$(aerospace list-windows --workspace $AEROSPACE_FOCUSED_MONITOR_NO | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
 
-default=(
-  padding_left=5
-  padding_right=5
-  icon.font="$FONT:Bold:17.0"
-  label.font="$FONT:Bold:14.0"
-  icon.color=$WHITE
-  label.color=$WHITE
-  icon.padding_left=4
-  icon.padding_right=8
-  label.padding_left=8
-  label.padding_right=4
-  background.corner_radius=5
-  background.height=28
-  background.border_width=3
-  background.color=$BG
-  background.drawing=on
+# # Setting up and starting the helper process
+# HELPER=git.felix.helper
+# killall helper
+# (cd $CONFIG_DIR/helper && make)
+# $CONFIG_DIR/helper/helper $HELPER > /dev/null 2>&1 &
+#
+# # Unload the macOS on screen indicator overlay for volume change
+# launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist > /dev/null 2>&1 &
+
+# Setting up the general bar appearance of the bar
+bar=(
+  height=45
+  color=$BAR_COLOR
+  border_width=2
+  border_color=$BAR_BORDER_COLOR
+  shadow=off
+  position=top
+  sticky=on
+  padding_right=10
+  padding_left=10
+  y_offset=-5
+  margin=-2
+  topmost=window
+  color=0x00000000
+  border_color=0x00000000
 )
-sketchybar --default "${default[@]}"
 
-##### Left Side Items #####
-sketchybar --add event aerospace_workspace_change
+sketchybar --bar "${bar[@]}"
 
-for sid in $(aerospace list-workspaces --all); do
-    sketchybar --add item space.$sid left \
-        --subscribe space.$sid aerospace_workspace_change \
-        --set space.$sid \
-        icon.padding_left=0 \
-        icon.padding_right=0 \
-        background.border_color=$GREEN \
-        background.drawing=off \
-        background.corner_radius=0 \
-        label="$sid" \
-        label.padding_right=10 \
-        click_script="aerospace workspace $sid" \
-        script="$CONFIG_DIR/plugins/aerospace.sh $sid"
-done
+# Setting up default values
+defaults=(
+  updates=when_shown
+  icon.font="$FONT:Regular:14.0"
+  icon.color=$ICON_COLOR
+  icon.padding_left=$PADDINS
+  icon.padding_right=$PADDINGS
+  label.font="$FONT:Semibold:13.0"
+  label.color=$LABEL_COLOR
+  label.padding_left=$PADDINGS
+  label.padding_right=$PADDINGS
+#  label.shadow.drawing=on
+#  label.shadow.distance=2
+#  label.shadow.color=0xff000000
+  padding_right=$PADDINGS
+  padding_left=$PADDINGS
+  background.height=26
+  background.corner_radius=9
+  background.border_width=2
+  popup.background.border_width=2
+  popup.background.corner_radius=9
+  popup.background.border_color=$POPUP_BORDER_COLOR
+  popup.background.color=$POPUP_BACKGROUND_COLOR
+  popup.blur_radius=20
+  popup.background.shadow.drawing=on
+  scroll_texts=on
 
-sketchybar --add bracket aerospace '/space\..*/' \
-           --set aerospace background.color=$BG \
-                           background.border_width=3 \
-                           background.corner_radius=4 \
-                           background.border_color=$GREEN
+)
 
-##### Right of Notch Items #####
-source $ITEM_DIR/cpu.sh
-source $ITEM_DIR/media.sh
+sketchybar --default "${defaults[@]}"
 
-##### Right Side Items #####
-source $ITEM_DIR/calendar.sh
-source $ITEM_DIR/volume.sh
-source $ITEM_DIR/battery.sh
 
-##### Force all scripts to run the first time (never do this in a script) #####
+# Left
+source "$ITEM_DIR/apple.sh"
+source "$ITEM_DIR/spaces.sh"
+source "$ITEM_DIR/front_app.sh"
+#source "$ITEM_DIR/yabai.sh"
+
+# Center
+# source "$ITEM_DIR/spotify.sh"
+# source "$ITEM_DIR/media.sh"
+
+# Right
+source "$ITEM_DIR/calendar.sh"
+source "$ITEM_DIR/battery.sh"
+source "$ITEM_DIR/volume.sh"
+#source "$ITEM_DIR/svim.sh"
+
+source "$ITEM_DIR/cpu.sh"
+source "$ITEM_DIR/wifi.sh"
+
+sketchybar --hotload on
+
+# Forcing all item scripts to run (never do this outside of sketchybarrc)
 sketchybar --update
+
+echo "sketchybar configuation loaded.."

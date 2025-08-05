@@ -1,8 +1,16 @@
 #!/bin/bash
 
-sketchybar --add item calendar right \
-           --set calendar icon=􀧞     \
-                          update_freq=5 \
-                          script="$PLUGIN_DIR/calendar.sh" \
-                          background.border_color=$RED \
-                          background.drawing=on
+calendar=(
+  icon=􀧞
+  icon.font="$FONT:Black:16.0"
+  icon.padding_right=0
+  label.align=right
+  padding_left=15
+  update_freq=30
+  script="$PLUGIN_DIR/calendar.sh"
+  click_script="$PLUGIN_DIR/zen.sh"
+)
+
+sketchybar --add item calendar right       \
+           --set calendar "${calendar[@]}" \
+           --subscribe calendar system_woke
