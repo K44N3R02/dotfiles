@@ -1,6 +1,7 @@
-theme = rose-pine
+theme = Builtin Tango Dark
 font-family = jetbrains mono
 font-size = 20
+background-opacity = 1
 
 command = "/opt/homebrew/bin/tmux new-session -s k44n -A"
 
