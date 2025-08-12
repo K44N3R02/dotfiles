@@ -12,6 +12,7 @@ after-startup-command = [
     'exec-and-forget ~/scripts/wifi-stat.zsh',
     'exec-and-forget borders style=round active_color=0xff00bfff inactive_color=0xffdc143c width=5.0 hidpi=on',
     'workspace 2',
+    'exec-and-forget open -a "Ghostty.app"'
 ]
 
 exec-on-workspace-change = ['/bin/bash', '-c',
