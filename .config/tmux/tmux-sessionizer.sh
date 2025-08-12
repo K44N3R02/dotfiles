@@ -27,7 +27,7 @@ if [[ $# -eq 1 ]]; then
 else
     # If someone wants to make this extensible, i'll accept
     # PR
-    selected=$((echo "/Users/k44n"; find ~/ ~/vaults ~/learn/** ~/projects/work ~/projects/contrib ~/.config ~/odtu/** -mindepth 1 -maxdepth 1 -type d) | fzf)
+    selected=$((echo "/Users/k44n"; find ~/ ~/vaults ~/learn ~/learn/** ~/projects/work ~/projects/contrib ~/.config ~/odtu/** -mindepth 1 -maxdepth 1 -type d) | fzf)
 fi
 
 if [[ -z $selected ]]; then
