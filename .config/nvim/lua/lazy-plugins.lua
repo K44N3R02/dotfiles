@@ -183,7 +183,24 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        clangd = {},
+        clangd = {
+          on_attach = function(client, bufnr)
+            -- Check if the file is a C file (.c or .h)
+            if vim.bo.filetype == 'c' then
+              client.config.initialization_options.fallbackFlags = {
+                '-std=c99', -- Use the C99 standard
+                '-xc', -- Explicitly set the language to C
+                '-nostdinc++', -- The most crucial flag: disable C++ standard headers
+              }
+            end
+            -- Here you can add any other on_attach logic specific for clangd
+          end,
+          -- Pass the capabilities from nvim-cmp to clangd
+          capabilities = vim.tbl_deep_extend('force', {}, capabilities, {
+            -- You can also add clangd specific capabilities here if needed
+          }),
+          initialization_options = { fallbackFlags = {} },
+        },
         codelldb = {},
         gopls = {},
         basedpyright = {},
