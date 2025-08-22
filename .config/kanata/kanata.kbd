@@ -3,6 +3,7 @@
 )
 
 (defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
   tab  q    w    e    r    t    y    u    i    o    p
   caps a    s    d    f    g    h    j    k    l    ;
        z    x    c    v    b    n    m    ,    .    /
@@ -33,13 +34,15 @@
 )
 
 (deflayer base
-  @tab q    @w   @e   @r   t    y   @u   @i   @o    p
-  @esc a    @s   @d   @f   g    h   @j   @k   @l    ;
-       z    @x   @c   @v   b    n   @m   @,   @.    /
+  nop0 🔅   🔆   nop0 nop0 nop0 nop0 ◀◀   ▶⏸   ▶▶    🔇  🔉  🔊
+  @tab q    @w   @e   @r   t    y    @u   @i   @o    p
+  @esc a    @s   @d   @f   g    h    @j   @k   @l    ;
+       z    @x   @c   @v   b    n    @m   @,   @.    /
   @spc
 )
 
 (deflayer symbol
+  _    _    _    _    _    _    _    _    _    _    _    _    _
   tab  `    @<   @>   min  @|   @^   @{   @}   @$   \
   @esc @!   @*   /    =    @&   @#   @lp  @rp  ;    S-'
        @~   @+   [    ]    @%   @@   @:   ,    .    '
@@ -47,6 +50,7 @@
 )
 
 (deflayer number
+  _    _    _    _    _    _    _    _    _    _    _    _    _
   tab  pgup home up   end  XX   XX   1    2    3    min
   @esc pgdn left down rght XX   spc  4    5    6    0
        XX   XX   XX   XX   XX   XX   7    8    9    @_
