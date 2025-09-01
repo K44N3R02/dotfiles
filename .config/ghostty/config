@@ -3,9 +3,11 @@ font-family = jetbrains mono
 font-size = 20
 background-opacity = 0.33
 
-command = "/opt/homebrew/bin/tmux new-session -s k44n -A"
+initial-command = "/opt/homebrew/bin/tmux new-session -s k44n -A"
 
 macos-option-as-alt = true
 macos-titlebar-style = hidden
 title = " "
+
+keybind = global:cmd+ctrl+t=toggle_quick_terminal
 
