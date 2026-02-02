@@ -1,56 +1,56 @@
 #!/bin/bash
 
-#echo space.sh $'FOCUSED_WORKSPACE': $FOCUSED_WORKSPACE, $'SELECTED': $SELECTED, NAME: $NAME, SENDER: $SENDER  >> ~/aaaa
+source "$CONFIG_DIR/colors.sh"
 
-update() {
-  if [ "$SENDER" = "space_change" ]; then
-    #echo space.sh $'FOCUSED_WORKSPACE': $FOCUSED_WORKSPACE, $'SELECTED': $SELECTED, NAME: $NAME, SENDER: $SENDER, INFO: $INFO  >> ~/aaaa
-    #echo $(aerospace list-workspaces --focused) >> ~/aaaa
-    source "$CONFIG_DIR/colors.sh"
-    COLOR=$BACKGROUND_2
-    if [ "$SELECTED" = "true" ]; then
-      COLOR=$GREY
-    fi
-    # sketchybar --set $NAME icon.highlight=$SELECTED \
-    #                        label.highlight=$SELECTED \
-    #                        background.border_color=$COLOR
+update_spaces() {
+  FOCUSED_WORKSPACE=$(aerospace list-workspaces --focused)
+  ALL_WORKSPACES=$(aerospace list-workspaces --all)
+  MONITORS=$(aerospace list-monitors | awk '{print $1}')
+
+  for sid in $ALL_WORKSPACES; do
+    APPS_IN_SPACE=$(aerospace list-windows --workspace "$sid" | awk -F'|' '{print $2}' | grep -v "Window Title" | xargs)
     
-    sketchybar --set space.$(aerospace list-workspaces --focused) icon.highlight=true \
-                      label.highlight=true \
-                      background.border_color=$GREY
-  fi
-}
-
-set_space_label() {
-  sketchybar --set $NAME icon="$@"
-}
-
-mouse_clicked() {
-  if [ "$BUTTON" = "right" ]; then
-    # yabai -m space --destroy $SID
-    echo ''
-  else
-    if [ "$MODIFIER" = "shift" ]; then
-      SPACE_LABEL="$(osascript -e "return (text returned of (display dialog \"Give a name to space $NAME:\" default answer \"\" with icon note buttons {\"Cancel\", \"Continue\"} default button \"Continue\"))")"
-      if [ $? -eq 0 ]; then
-        if [ "$SPACE_LABEL" = "" ]; then
-          set_space_label "${NAME:6}"
-        else
-          set_space_label "${NAME:6} ($SPACE_LABEL)"
-        fi
-      fi
-    else
-      #yabai -m space --focus $SID 2>/dev/null
-      #echo space.sh BUTTON: $BUTTON, $'SELECTED': $SELECTED, MODIFIER: $MODIFIER, NAME: $NAME, SENDER: $SENDER, INFO: $INFO, TEST: ${NAME#*.}, ${NAME:6} >> ~/aaaa
-      aerospace workspace ${NAME#*.}
+    COLOR=$GREY
+    if [ "$sid" = "$FOCUSED_WORKSPACE" ]; then
+      COLOR=$RED
+    elif [ -n "$APPS_IN_SPACE" ]; then
+      COLOR=$GREEN
     fi
-  fi
+
+    for m in $MONITORS; do
+      sketchybar --set "space.$sid.$m" icon.color=$COLOR
+    done
+  done
 }
 
-# echo plugin_space.sh $SENDER >> ~/aaaa
-case "$SENDER" in
-  "mouse.clicked") mouse_clicked
-  ;;
-  *) update
-  ;;
-esac
+update_apps() {
+  # If CPU is hidden (Zen mode), do nothing to the app strip
+  ZEN_MODE=$(sketchybar --query cpu | jq -r ".geometry.drawing")
+  if [ "$ZEN_MODE" = "off" ]; then
+    return
+  fi
+
+  FOCUSED_WORKSPACE=$(aerospace list-workspaces --focused)
+  MONITORS=$(aerospace list-monitors | awk '{print $1}')
+  
+  APPS=$(aerospace list-windows --workspace "$FOCUSED_WORKSPACE" | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}' | grep -v "Window Title" | grep -v "^$")
+  
+  ICON_STRIP=""
+  if [ -n "$APPS" ]; then
+    while read -r app; do
+      if [ -n "$app" ]; then
+        ICON=$($CONFIG_DIR/plugins/icon_map.sh "$app")
+        ICON_STRIP+="$ICON "
+      fi
+    done <<< "$APPS"
+  else
+    ICON_STRIP=" —"
+  fi
+
+  for m in $MONITORS; do
+    sketchybar --set "space_apps.$m" label="$ICON_STRIP"
+  done
+}
+
+update_spaces
+update_apps

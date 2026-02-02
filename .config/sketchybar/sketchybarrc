@@ -80,7 +80,6 @@ sketchybar --default "${defaults[@]}"
 # Left
 source "$ITEM_DIR/apple.sh"
 source "$ITEM_DIR/spaces.sh"
-source "$ITEM_DIR/front_app.sh"
 #source "$ITEM_DIR/yabai.sh"
 
 # Center
@@ -94,6 +93,7 @@ source "$ITEM_DIR/volume.sh"
 #source "$ITEM_DIR/svim.sh"
 
 source "$ITEM_DIR/cpu.sh"
+source "$ITEM_DIR/ram.sh"
 source "$ITEM_DIR/wifi.sh"
 
 sketchybar --hotload on
