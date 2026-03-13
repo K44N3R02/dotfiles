@@ -41,6 +41,14 @@
   @spc
 )
 
+(deflayer nomod
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  @bas q    w    e    r    t    y    u    i    o    p
+  caps a    s    d    f    g    h    j    k    l    ;
+       z    x    c    v    b    n    m    ,    .    /
+  spc
+)
+
 (deflayer symbol
   _    _    _    _    _    _    _    _    _    _    _    _    _
   tab  `    @<   @>   min  @|   @^   @{   @}   @$   \
@@ -114,20 +122,20 @@
 )
 
 (defalias
-  sSym (tap-hold-release $tap-time $hold-time-long s (layer-toggle symbol))
+  sSym (tap-hold-release $tap-time $hold-time s (layer-toggle symbol))
   dS (tap-hold-release $tap-time $hold-time d lsft)
   fC (tap-hold-release $tap-time $hold-time f lctl)
-  eA (tap-hold-release $tap-time $hold-time-long e lalt)
-  rM (tap-hold-release $tap-time $hold-time-long r lmet)
+  eA (tap-hold-release $tap-time $hold-time e lalt)
+  rM (tap-hold-release $tap-time $hold-time r lmet)
 
-  uM (tap-hold-release $tap-time $hold-time-long u rmet)
-  iA (tap-hold-release $tap-time $hold-time-long i ralt)
+  uM (tap-hold-release $tap-time $hold-time u rmet)
+  iA (tap-hold-release $tap-time $hold-time i ralt)
   jC (tap-hold-release $tap-time $hold-time j rctl)
   kS (tap-hold-release $tap-time $hold-time k rsft)
-  lSym (tap-hold-release $tap-time $hold-time-long l (layer-toggle symbol))
+  lSym (tap-hold-release $tap-time $hold-time l (layer-toggle symbol))
 
   esc esc
-  tab tab
+  tab (layer-switch nomod)
 
   spc (tap-hold-release $tap-time $hold-time spc (layer-toggle number))
 
