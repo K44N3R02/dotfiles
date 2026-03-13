@@ -10,10 +10,6 @@ after-login-command = [ ]
 after-startup-command = [
     'exec-and-forget sketchybar',
     'exec-and-forget ~/scripts/wifi-stat.zsh',
-    'exec-and-forget borders',
-    'exec-and-forget open -a Hammerspoon',
-    'workspace 2',
-    'exec-and-forget open -a "Ghostty.app"'
 ]
 
 exec-on-workspace-change = ['/bin/bash', '-c',
@@ -117,27 +113,31 @@ alt-shift-equal = 'resize smart +50'
 
 alt-shift-f = 'fullscreen'
 
-alt-1 = 'workspace 1'
-alt-2 = 'workspace 2'
-alt-3 = 'workspace 3'
-alt-4 = 'workspace 4'
-alt-5 = 'workspace 5'
-alt-6 = 'workspace 6'
-alt-7 = 'workspace 7'
-alt-8 = 'workspace 8'
-alt-9 = 'workspace 9'
-alt-0 = 'workspace 10'
+# App launchers
+ctrl-alt-shift-t = ['workspace t', 'exec-and-forget open -a "Ghostty.app"']
+ctrl-alt-shift-o = ['workspace o', 'exec-and-forget open -a "Obsidian.app"']
+ctrl-alt-shift-b = ['workspace b', 'exec-and-forget open -a "qutebrowser"']
+ctrl-alt-shift-w = ['workspace w', 'exec-and-forget open -a "WhatsApp.app"']
+ctrl-alt-shift-u = ['workspace u', ]
+ctrl-alt-shift-m = ['workspace m', 'exec-and-forget open -a "Mail.app"']
+ctrl-alt-shift-a = ['workspace a', 'exec-and-forget open -a "Activity Monitor.app"']
+ctrl-alt-shift-f = ['workspace f', 'exec-and-forget open -a "Finder.app"']
+ctrl-alt-shift-k = ['workspace k', 'exec-and-forget open -a "Sabaki.app"']
+ctrl-alt-shift-v = ['workspace v', 'exec-and-forget code']
+ctrl-alt-shift-p = 'exec-and-forget open -a "Bitwarden.app"'
 
-alt-shift-1 = 'move-node-to-workspace 1'
-alt-shift-2 = 'move-node-to-workspace 2'
-alt-shift-3 = 'move-node-to-workspace 3'
-alt-shift-4 = 'move-node-to-workspace 4'
-alt-shift-5 = 'move-node-to-workspace 5'
-alt-shift-6 = 'move-node-to-workspace 6'
-alt-shift-7 = 'move-node-to-workspace 7'
-alt-shift-8 = 'move-node-to-workspace 8'
-alt-shift-9 = 'move-node-to-workspace 9'
-alt-shift-0 = 'move-node-to-workspace 10'
+ctrl-alt-shift-z = 'exec-and-forget ~/scripts/toggle_zen.sh'
+
+# Move between workspaces
+cmd-ctrl-alt-shift-t = ['move-node-to-workspace t', 'workspace t']
+cmd-ctrl-alt-shift-o = ['move-node-to-workspace o', 'workspace o']
+cmd-ctrl-alt-shift-b = ['move-node-to-workspace b', 'workspace b']
+cmd-ctrl-alt-shift-w = ['move-node-to-workspace w', 'workspace w']
+cmd-ctrl-alt-shift-u = ['move-node-to-workspace u', 'workspace u']
+cmd-ctrl-alt-shift-m = ['move-node-to-workspace m', 'workspace m']
+cmd-ctrl-alt-shift-a = ['move-node-to-workspace a', 'workspace a']
+cmd-ctrl-alt-shift-f = ['move-node-to-workspace f', 'workspace f']
+cmd-ctrl-alt-shift-k = ['move-node-to-workspace k', 'workspace k']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
@@ -145,8 +145,7 @@ alt-tab = 'workspace-back-and-forth'
 alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
-alt-semicolon = 'mode service'
-alt-space = 'mode launcher'
+ctrl-alt-shift-comma = 'mode service'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -161,16 +160,6 @@ h = ['join-with left', 'mode main']
 j = ['join-with down', 'mode main']
 k = ['join-with up', 'mode main']
 l = ['join-with right', 'mode main']
-
-[mode.launcher.binding]
-f = ['exec-and-forget ~/scripts/choose.zsh', 'mode main']
-o = ['exec-and-forget ~/scripts/open_app.zsh', 'mode main']
-
-j = ['exec-and-forget open -a "Ghostty.app" -n', 'mode main']
-k = ['exec-and-forget open -a "Zen.app" -n', 'mode main']
-l = ['exec-and-forget open -a "Obsidian.app" -n', 'mode main']
-u = ['exec-and-forget open -a "System Settings.app" -n', 'mode main']
-i = ['exec-and-forget open -a "Activity Monitor.app" -n', 'mode main']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.AppStore'
