@@ -1,8 +1,9 @@
 theme = Builtin Tango Dark
 font-family = jetbrains mono
 font-size = 20
-background-opacity = 0.33
-
+font-feature = -liga, -calt
+background-opacity = 1.00
+# ===
 initial-command = "/opt/homebrew/bin/tmux new-session -s k44n -A"
 
 macos-option-as-alt = true
@@ -10,4 +11,6 @@ macos-titlebar-style = hidden
 title = " "
 
 keybind = global:cmd+ctrl+t=toggle_quick_terminal
+
+# custom-shader = ~/.config/ghostty/ghostty-shaders/tft.glsl
 
