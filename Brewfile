@@ -1,6 +1,7 @@
 # Brews
 brew "bash"
 brew "bat"
+brew "bob"
 brew "choose-gui"
 brew "clang-format"
 brew "cmatrix"

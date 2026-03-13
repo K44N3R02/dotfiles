@@ -94,7 +94,6 @@ k() {
   sudo ~/bin/kanata/target/release/kanata -c ~/.config/kanata/kanata.kbd
 }
 alias zi='__zoxide_zi'
-alias nv='NVIM_APPNAME=nvim-new ~/bin/nvim-macos-arm64/bin/nvim'
 alias digital='/opt/homebrew/Caskroom/digital/0.31/Digital/Digital.sh'
 
 hash -d sync=/Users/k44n/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/sync/sync
