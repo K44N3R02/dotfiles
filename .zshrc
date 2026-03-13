@@ -88,8 +88,6 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
 alias bbic='brew update && brew bundle install --cleanup --file=~/Brewfile && brew upgrade'
 alias ls='ls --color'
-alias vv='nvim .'
-alias v='nvim'
 alias c='clear'
 alias kanata='~/bin/kanata/target/release/kanata'
 k() {
@@ -97,7 +95,6 @@ k() {
 }
 alias zi='__zoxide_zi'
 alias nv='NVIM_APPNAME=nvim-new ~/bin/nvim-macos-arm64/bin/nvim'
-alias nvchad='NVIM_APPNAME=nvim-nvchad nvim'
 alias digital='/opt/homebrew/Caskroom/digital/0.31/Digital/Digital.sh'
 
 hash -d sync=/Users/k44n/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/sync/sync
