@@ -12,7 +12,7 @@ update_spaces() {
     
     COLOR=$GREY
     if [ "$sid" = "$FOCUSED_WORKSPACE" ]; then
-      COLOR=$RED
+      COLOR=$ORANGE
     elif [ -n "$APPS_IN_SPACE" ]; then
       COLOR=$GREEN
     fi
