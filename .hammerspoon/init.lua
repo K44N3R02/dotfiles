@@ -67,5 +67,15 @@ hs.hotkey.bind({ "cmd", "alt" }, "V", function()
 	end)
 end)
 
+-- <ctrl-w> Intelligent delete word or <C-W>
+hs.hotkey.bind({ "ctrl" }, "W", function ()
+    local currentApp = hs.application.frontmostApplication()
+    if currentApp:title():match("tty$") or currentApp:title():match("Terminal") then
+        hs.eventtap.keyStroke({ "ctrl" }, "W", 0, currentApp)
+    else
+        hs.eventtap.keyStroke({ "alt" }, "delete")
+    end
+end)
+
 -- Reload confirmation message
 hs.alert.show("Hammerspoon config reloaded.")
