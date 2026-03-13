@@ -70,6 +70,14 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
+# fzf rosepine theme
+export FZF_DEFAULT_OPTS="
+     --color=fg:#908caa,hl:#ea9a97
+     --color=fg+:#e0def4,hl+:#ea9a97
+     --color=border:#44415a,header:#3e8fb0,gutter:#232136
+     --color=spinner:#f6c177,info:#9ccfd8
+     --color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
+
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
@@ -83,8 +91,16 @@ alias ls='ls --color'
 alias vv='nvim .'
 alias v='nvim'
 alias c='clear'
-alias k='sudo kanata -c ~/.config/kanata/kanata.kbd'
+alias kanata='~/bin/kanata/target/release/kanata'
+k() {
+  sudo ~/bin/kanata/target/release/kanata -c ~/.config/kanata/kanata.kbd
+}
 alias zi='__zoxide_zi'
+alias nv='NVIM_APPNAME=nvim-new ~/bin/nvim-macos-arm64/bin/nvim'
+alias nvchad='NVIM_APPNAME=nvim-nvchad nvim'
+alias digital='/opt/homebrew/Caskroom/digital/0.31/Digital/Digital.sh'
+
+hash -d sync=/Users/k44n/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/sync/sync
 
 # Shell integrations
 eval "$(fzf --zsh)"
