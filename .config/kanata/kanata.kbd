@@ -4,10 +4,11 @@
 
 (defsrc
   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
-  tab  q    w    e    r    t    y    u    i    o    p
-  caps a    s    d    f    g    h    j    k    l    ;
-       z    x    c    v    b    n    m    ,    .    /
-  spc
+       1    2    3    4    5    6    7    8    9    0    -    =   bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]   \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  `    z    x    c    v    b    n    m    ,    .    /    rsft
+       lalt lmet           spc            rmet ralt
 )
 
 (defalias
@@ -34,36 +35,46 @@
 )
 
 (deflayer base
-  nop0 🔅   🔆   nop0 nop0 nop0 nop0 ◀◀   ▶⏸   ▶▶    🔇  🔉  🔊
-  @tab q    @w   @e   @r   t    y    @u   @i   @o    p
-  @esc a    @s   @d   @f   g    h    @j   @k   @l    ;
-       z    @x   @c   @v   b    n    @m   @,   @.    /
-  @spc
+  nop0 🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉   🔊
+       1    2    3    4    5    lrld 6    7    8    9    0    XX   bspc
+  tab  q    w    f    p    b    [    j    l    u    y    '    bspc ret
+  esc  a    r    @s   @t   g    ]    m    @n   @e   i    o    ret
+  z    x    c    @d    v   @_   @#   k    @h    ,   .    @?
+       lalt XX             @spc           @tmb1 XX
 )
 
 (deflayer nomod
   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
-  @bas q    w    e    r    t    y    u    i    o    p
-  caps a    s    d    f    g    h    j    k    l    ;
-       z    x    c    v    b    n    m    ,    .    /
-  spc
+       1    2    3    4    5    6    7    8    9    0    -    =   bspc
+  @bas q    w    f    p    b    [    j    l    u    y    ;    bspc ret
+  caps a    r    s    t    g    ]    m    n    e    i    o    ret
+  z    x    c    d    v    @_   @#   k    h    ,    .    @?
+       lalt lmet           spc            rmet ralt
 )
 
-(deflayer symbol
-  _    _    _    _    _    _    _    _    _    _    _    _    _
-  tab  `    @<   @>   min  @|   @^   @{   @}   @$   \
-  @esc @!   @*   /    =    @&   @#   @lp  @rp  ;    S-'
-       @~   @+   [    ]    @%   @@   @:   ,    .    '
-  spc
+(deflayer symbol-oneshot
+  nop0 f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+       1    2    3    4    5    lrld 6    7    8    9    0    XX   bspc
+  tab  `    @<   @>   min  @|   XX   @^   @{   @}   @$   \    bspc ret
+  esc  @!   @*   /    =    @&   XX   @#   @lp  @rp  ;    S-'  ret
+  @~   @+   [    ]    @%   @_   XX   @@   @:   ,    .    '
+       lalt XX             @spc           @tmb2 XX
 )
 
-(deflayer number
-  _    _    _    _    _    _    _    _    _    _    _    _    _
-  tab  pgup home up   end  XX   XX   1    2    3    min
-  @esc pgdn left down rght XX   spc  4    5    6    0
-       XX   XX   XX   XX   XX   XX   7    8    9    @_
-  XX
+(deflayer symbol-persistent
+  nop0 f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+       1    2    3    4    5    lrld 6    7    8    9    0    XX   bspc
+  tab  `    @<   @>   min  @|   XX   @^   @{   @}   @$   \    bspc ret
+  @bas @!   @*   /    =    @&   XX   @#   @lp  @rp  ;    S-'  ret
+  @~   @+   [    ]    @%   @_   XX   @@   @:   ,    .    '
+       lalt XX             @spc           nop0 XX
 )
+
+;;(deflayer number
+;;  tab  XX   ▶⏸   ◀◀   🔉   XX   XX   XX   🔊   ▶▶   🔇   XX   bspc ret
+;;  @esc 1    2    3    4    5    XX   6    7    8    9    0    ret
+;;  XX   XX   XX   🔅   XX   XX   XX   XX   🔆   ,    .    '
+;;)
 
 (defvar
   tap-time 200
@@ -71,105 +82,25 @@
   hold-time-long 400
   dance-time 200
   chord-time 32
-)
-
-(defchords wer $chord-time
-  (w    ) w
-  (  e  ) @eA
-  (    r) @rM
-  (w e  ) @we
-;;  (  e r) @er
-)
-
-(defchords sdf $chord-time
-  (s    ) @sSym
-  (  d  ) @dS
-  (    f) @fC
-;;  (s d  ) @sd
-;;  (  d f) @df
-)
-
-(defchords xcv $chord-time
-  (x    ) x
-  (  c  ) c
-  (    v) v
-  (x c  ) @xc
-;;  (  c v) @cv
-)
-
-(defchords uio $chord-time
-  (u    ) @uM
-  (  i  ) @iA
-  (    o) o
-;;  (u i  ) @ui
-  (  i o) @io
-)
-
-(defchords jkl $chord-time
-  (j    ) @jC
-  (  k  ) @kS
-  (    l) @lSym
-;;  (j k  ) @jk
-;;  (  k l) @kl
-)
-
-(defchords m,. $chord-time
-  (m    ) m
-  (  ,  ) ,
-  (    .) .
-;;  (m ,  ) @m,
-  (  , .) @,.
+  one-shot-time 2000
 )
 
 (defalias
-  sSym (tap-hold-release $tap-time $hold-time s (layer-toggle symbol))
-  dS (tap-hold-release $tap-time $hold-time d lsft)
-  fC (tap-hold-release $tap-time $hold-time f lctl)
-  eA (tap-hold-release $tap-time $hold-time e lalt)
-  rM (tap-hold-release $tap-time $hold-time r lmet)
+  ;; define home row mods
+  s (tap-hold-release $tap-time $hold-time-long s lalt)
+  t (tap-hold-release $tap-time $hold-time-long t lmet)
+  n (tap-hold-release $tap-time $hold-time-long n rmet)
+  e (tap-hold-release $tap-time $hold-time-long e ralt)
 
-  uM (tap-hold-release $tap-time $hold-time u rmet)
-  iA (tap-hold-release $tap-time $hold-time i ralt)
-  jC (tap-hold-release $tap-time $hold-time j rctl)
-  kS (tap-hold-release $tap-time $hold-time k rsft)
-  lSym (tap-hold-release $tap-time $hold-time l (layer-toggle symbol))
+  d (tap-hold-release $tap-time $hold-time-long d (multi lctl lalt lsft))
+  h (tap-hold-release $tap-time $hold-time-long h (multi lctl lalt lsft))
 
-  esc esc
-  tab (layer-switch nomod)
-
-  spc (tap-hold-release $tap-time $hold-time spc (layer-toggle number))
-
+  sym-o (one-shot $one-shot-time (layer-while-held symbol-oneshot))
+  sym-p (layer-switch symbol-persistent)
+;;  num (layer-switch number)
   bas (layer-switch base)
 
-  we tab
-  er nop0
-  sd nop0
-  df nop0
-  xc esc
-  cv nop0
-  ui nop0
-  io A-bspc
-  jk nop0
-  kl nop0
-  m, nop0
-  ,. ret
-
-  w (chord wer w)
-  e (chord wer e)
-  r (chord wer r)
-  s (chord sdf s)
-  d (chord sdf d)
-  f (chord sdf f)
-  x (chord xcv x)
-  c (chord xcv c)
-  v (chord xcv v)
-  u (chord uio u)
-  i (chord uio i)
-  o (chord uio o)
-  j (chord jkl j)
-  k (chord jkl k)
-  l (chord jkl l)
-  m (chord m,. m)
-  , (chord m,. ,)
-  . (chord m,. .)
+  spc (tap-hold-release $tap-time $hold-time spc lsft)
+  tmb1 (tap-hold-release $tap-time $hold-time @sym-o rctl)
+  tmb2 (tap-hold-release $tap-time $hold-time @sym-p rctl)
 )
