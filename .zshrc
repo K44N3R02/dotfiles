@@ -96,6 +96,8 @@ k() {
 alias zi='__zoxide_zi'
 alias digital='/opt/homebrew/Caskroom/digital/0.31/Digital/Digital.sh'
 
+. ~/.local/share/bob/env/env.sh
+
 hash -d sync=/Users/k44n/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/sync/sync
 
 # Shell integrations

@@ -1,0 +1,10 @@
+[user]
+	name = k44n
+	email = kaanemireroz@gmail.com
+[core]
+	editor = vim
+	excludesfile = /Users/k44n/.gitignore_global
+[init]
+	defaultbranch = main
+[pull]
+	rebase = true
