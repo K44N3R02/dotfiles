@@ -2,6 +2,14 @@
 
 PATH="/opt/homebrew/bin:$PATH"
 
+# fzf rosepine theme
+export FZF_DEFAULT_OPTS="
+     --color=fg:#908caa,hl:#ea9a97
+     --color=fg+:#e0def4,hl+:#ea9a97
+     --color=border:#44415a,header:#3e8fb0,gutter:#232136
+     --color=spinner:#f6c177,info:#9ccfd8
+     --color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
+
 switch_to() {
     if [[ -z $TMUX ]]; then
         tmux attach-session -t $1
@@ -27,7 +35,7 @@ if [[ $# -eq 1 ]]; then
 else
     # If someone wants to make this extensible, i'll accept
     # PR
-    selected=$((echo "/Users/k44n"; find ~/ ~/vaults ~/learn ~/learn/** ~/projects/work ~/projects/contrib ~/.config ~/odtu/** -mindepth 1 -maxdepth 1 -type d) | fzf)
+    selected=$((echo "/Users/k44n"; find ~/learn/** ~/projects/** ~/.config ~/odtu/** -mindepth 1 -maxdepth 1 -type d) | fzf --margin 10%)
 fi
 
 if [[ -z $selected ]]; then
