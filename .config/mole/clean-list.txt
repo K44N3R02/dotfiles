@@ -1,0 +1,161 @@
+# Mole Cleanup Preview - 2026-04-23 19:45:17
+#
+# How to protect files:
+# 1. Copy any path below to ~/.config/mole/whitelist
+# 2. Run: mo clean --whitelist
+#
+# Example:
+#   /Users/*/Library/Caches/com.example.app
+#
+
+
+=== User essentials ===
+/Users/k44n/Library/Caches  # 12.94GB, 63 items
+/Users/k44n/Library/Logs  # 38.5MB, 14 items
+
+=== App caches ===
+/Users/k44n/Library/Saved Application State/net.ankiweb.dtop.savedState  # 12KB
+/Users/k44n/Library/Caches/com.apple.helpd  # 35.8MB, 11 items
+/Users/k44n/Library/Caches/GeoServices  # 62.8MB, 9 items
+
+=== Browsers ===
+/Users/k44n/Library/Caches/Google/Chrome/Default  # 397.0MB
+/Users/k44n/Library/Application Support/Google/Chrome/Default/GPUCache  # 5.8MB, 5 items
+/Users/k44n/Library/Application Support/Google/Chrome/component_crx_cache  # 35.2MB, 18 items
+/Users/k44n/Library/Application Support/Google/Chrome/ShaderCache  # 558KB, 5 items
+/Users/k44n/Library/Application Support/Google/Chrome/GrShaderCache  # 558KB, 5 items
+/Users/k44n/Library/Application Support/Google/Chrome/GraphiteDawnCache  # 13.0MB, 67 items
+/Users/k44n/Library/Application Support/Google/Chrome/Default//Service Worker/ScriptCache  # 10.3MB, 19 items
+/Users/k44n/Library/Application Support/Google/GoogleUpdater/crx_cache  # 728.2MB, 3 items
+/Users/k44n/Library/Application Support/Google/GoogleUpdater/updater.log.old  # 1.1MB
+/Users/k44n/Library/Caches/BraveSoftware/Brave-Browser/Default  # 1.62GB
+/Users/k44n/Library/Application Support/BraveSoftware/Brave-Browser/Default/GPUCache  # 5.8MB, 5 items
+/Users/k44n/Library/Application Support/BraveSoftware/Brave-Browser/component_crx_cache  # 14.6MB, 16 items
+/Users/k44n/Library/Application Support/BraveSoftware/Brave-Browser/ShaderCache  # 558KB, 5 items
+/Users/k44n/Library/Application Support/BraveSoftware/Brave-Browser/GrShaderCache  # 558KB, 5 items
+/Users/k44n/Library/Application Support/BraveSoftware/Brave-Browser/GraphiteDawnCache  # 16.5MB, 117 items
+/Users/k44n/Library/Application Support/BraveSoftware/Brave-Browser/Default//Service Worker/ScriptCache  # 22.6MB, 49 items
+/Users/k44n/Library/Caches/zen/Profiles  # 1.12GB
+
+=== Cloud & Office ===
+
+=== Developer tools ===
+/Users/k44n/.npm/_cacache  # 558.6MB, 2 items
+/Users/k44n/.npm/_npx/1415fee72ff6294b  # 2.1MB
+/Users/k44n/.npm/_logs  # 267KB, 11 items
+/Users/k44n/.cache/uv  # 24.0MB, 5 items
+/Users/k44n/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f  # 12.0MB
+/Users/k44n/.cargo/git/CACHEDIR.TAG  # 1KB
+/Users/k44n  # 14KB, 2 items
+/Users/k44n/Projects/robotaksi/serhat_kodlar/pid (1)/pid/launch/__pycache__  # 8KB
+/Users/k44n/Projects/robotaksi/serhat_kodlar/pid/launch/__pycache__  # 8KB
+/Users/k44n/Projects/work/finchat/backend/__pycache__  # 8KB
+/Users/k44n/Projects/work/finchat/backend/services/__pycache__  # 20KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/ament_clang_format/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/ament_clang_tidy/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/ament_copyright/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/ament_cppcheck/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/ament_cpplint/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/ament_flake8/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/ament_index_python/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/ament_lint/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/ament_lint_cmake/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/ament_mypy/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/ament_package/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/ament_pclint/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/ament_pep257/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/ament_pycodestyle/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/ament_pyflakes/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/ament_uncrustify/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/ament_xmllint/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/domain_coordinator/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/launch/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/launch_pytest/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/launch_testing/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/launch_xml/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/launch_yaml/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/osrf_pycommon/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/rosidl_cli/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/rpyutils/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/build/tracetools_read/prefix_override/__pycache__  # 4KB
+/Users/k44n/learn/py/coursera-labs/anomaly-detection/__pycache__  # 8KB
+/Users/k44n/learn/py/coursera-labs/k-means/__pycache__  # 8KB
+/Users/k44n/learn/py/flask/demo/__pycache__  # 4KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/src/ament/ament_package/ament_package/__pycache__  # 8KB
+/Users/k44n/learn/gazebo/ros2/ros2_jazzy/src/ament/ament_package/ament_package/template/__pycache__  # 4KB
+/Users/k44n/odtu/Semester1/ceng111/the/THE3 tester/THE3 tester/__pycache__  # 4KB
+/Users/k44n/odtu/Semester1/ceng111/the/__pycache__  # 8KB
+/Users/k44n/vaults/__pycache__  # 4KB
+/Users/k44n/.android/cache  # 3.3MB, 42 items
+/Users/k44n/Library/Developer/Xcode/UserData/IB Support/Simulator Devices  # 36.7MB
+/Users/k44n/Library/Caches/org.swift.swiftpm  # 119KB, 2 items
+/Users/k44n/.nuget/packages  # 2.33GB, 163 items
+/Users/k44n/.cache/zig  # 45.2MB, 4 items
+/Users/k44n/Library/Caches/deno  # 108KB, 4 items
+/Users/k44n/Library/Caches/com.unity3d.unityhub.ShipIt  # 452.6MB, 3 items
+/Users/k44n/Library/Caches/com.unity3d.unityhub  # 82KB, 2 items
+/Users/k44n/Library/Caches/com.unity3d.UnityEditor/bee  # 270.4MB
+/Users/k44n/Library/Caches/SentryCrash  # 16KB, 4 items
+/Users/k44n/Library/Logs/CoreSimulator/CoreSimulator.log  # 14KB
+/Users/k44n/Library/Caches/com.apple.dt.Xcode  # 1.1MB, 4 items
+/Users/k44n/Library/Application Support/Code/logs  # 7.0MB, 3 items
+/Users/k44n/Library/Application Support/Code/Cache  # 160.9MB, 2 items
+/Users/k44n/Library/Application Support/Code/CachedData/072586267e68ece9a47aa43f8c108e0dcbf44622  # 15.9MB
+/Users/k44n/Library/Caches/Homebrew  # 5.35GB, 382 items
+
+=== Applications ===
+/Users/k44n/Library/Caches/us.zoom.xos/WebKit  # 9.5MB
+/Users/k44n/Library/Application Support/Steam/appcache  # 11.4MB, 5 items
+/Users/k44n/Library/Application Support/Steam/depotcache  # 2.5MB, 23 items
+/Users/k44n/Library/Application Support/Steam/logs  # 3.1MB, 41 items
+/Users/k44n/.zcompdump  # 57KB
+/Users/k44n/.lesshst  # 1KB
+/Users/k44n/Library/Caches/com.mitchellh.ghostty/sentry  # 4KB
+/Users/k44n/Library/Caches/com.raycast.macos/urlcache  # 6.0MB, 4 items
+/Users/k44n/Library/Caches/com.raycast.macos/fsCachedData  # 1.0MB, 9 items
+
+=== Virtualization ===
+
+=== Application Support ===
+
+=== App leftovers ===
+/Users/k44n/Library/WebKit/com.grammarly.GRLlamaOnboarding  # 958KB
+/Users/k44n/Library/WebKit/com.grammarly.ProjectLlama  # 500KB
+/Users/k44n/Library/HTTPStorages/com.aspyr.civ5xp.steam  # 61KB
+/Users/k44n/Library/HTTPStorages/com.brave.Browser  # 369KB
+/Users/k44n/Library/HTTPStorages/com.google.GoogleUpdater  # 500KB
+/Users/k44n/Library/HTTPStorages/com.grammarly.GRLlamaOnboarding.binarycookies  # 1KB
+/Users/k44n/Library/HTTPStorages/com.grammarly.ProjectLlama  # 172KB
+/Users/k44n/Library/HTTPStorages/com.grammarly.ProjectLlama.binarycookies  # 1KB
+/Users/k44n/Library/HTTPStorages/org.gimp.gimp-3.0  # 57KB
+/Users/k44n/Library/Application Support/com.DefaultCompany.2DProject  # 8KB
+/Users/k44n/Library/Application Support/com.grammarly.ProjectLlama  # 774KB
+/Users/k44n/Library/Application Support/org.gnome.Meld  # 8KB
+/Users/k44n/Library/Preferences/com.DefaultCompany.2D-URP.plist  # 1KB
+/Users/k44n/Library/Preferences/com.DefaultCompany.2DProject.plist  # 1KB
+/Users/k44n/Library/Preferences/org.gazebosim.Gazebo GUI.plist  # 1KB
+/Users/k44n/Library/Preferences/org.gimp.gimp-3.0.plist  # 1KB
+/Users/k44n/Library/Preferences/org.gnome.Meld.plist  # 1KB
+/Users/k44n/Library/Preferences/org.libreoffice.script.plist  # 1KB
+/Users/k44n/Library/Preferences/net.sourceforge.skim-app.skim.bookmarks.plist  # 1KB
+/Users/k44n/Library/Preferences/net.sourceforge.skim-app.skim.plist  # 1KB
+/Users/k44n/Library/Preferences/io.github.keycastr.plist  # 1KB
+
+=== Apple Silicon updates ===
+
+=== Device backups & firmware ===
+
+=== Time Machine ===
+
+=== Large files ===
+
+=== System Data clues ===
+
+=== Project artifacts ===
+
+# ============================================
+# Summary
+# ============================================
+# Potential cleanup: 28.29GB
+# Items: 1285
+# Categories: 84

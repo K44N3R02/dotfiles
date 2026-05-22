@@ -5,6 +5,7 @@ vim.g.maplocalleader = ' '
 
 vim.opt.relativenumber = true
 vim.opt.signcolumn = 'yes'
+vim.opt.colorcolumn = '81'
 vim.opt.mouse = 'a'
 vim.opt.breakindent = true
 vim.opt.list = true
@@ -30,7 +31,7 @@ vim.pack.add {
     { src = 'https://github.com/rose-pine/neovim',                name = 'rosepine' },
     { src = 'https://github.com/stevearc/oil.nvim',               name = 'oil.nvim' },
     { src = 'https://github.com/neovim/nvim-lspconfig',           name = 'nvim-lspconfig' },
-    { src = 'https://github.com/nvim-treesitter/nvim-treesitter', name = 'nvim-treesitter' },
+--    { src = 'https://github.com/nvim-treesitter/nvim-treesitter', name = 'nvim-treesitter' },
     { src = 'https://github.com/mason-org/mason.nvim',            name = 'mason.nvim' },
     { src = 'https://github.com/Saghen/blink.cmp',                name = 'blink.cmp' },
     { src = 'https://github.com/L3MON4D3/LuaSnip',                name = 'LuaSnip' },
@@ -53,7 +54,8 @@ vim.pack.add {
     { src = 'https://github.com/theHamsta/nvim-dap-virtual-text', name = 'nvim-dap-virtual-text' },
 
     { src = 'https://github.com/seblyng/roslyn.nvim',             name = 'roslyn.nvim' },
-    { src = 'https://github.com/tpope/vim-obsession',            name = 'vim-obsession' },
+    { src = 'https://github.com/tpope/vim-obsession',             name = 'vim-obsession' },
+    { src = 'https://github.com/lewis6991/gitsigns.nvim',         name = 'gitsigns.nvim' },
 }
 
 local rosepine = require('rose-pine')
@@ -73,16 +75,16 @@ local telescope = require('telescope')
 telescope.setup()
 
 
-local treesitter = require('nvim-treesitter')
-local treesitter_configs = require('nvim-treesitter.configs')
-treesitter.setup()
-treesitter_configs.setup({
-    highlight = { enable = false },
-})
+-- local treesitter = require('nvim-treesitter')
+-- local treesitter_configs = require('nvim-treesitter.configs')
+-- treesitter.setup()
+-- treesitter_configs.setup({
+--     highlight = { enable = false },
+-- })
 
 local luasnip = require('luasnip')
 luasnip.setup({ enable_autosnippets = true })
-require('luasnip.loaders.from_lua').load({ paths = '~/.config/nvim-new/snippets/' })
+require('luasnip.loaders.from_lua').load({ paths = '~/.config/nvim/snippets/' })
 
 local neogen = require('neogen')
 neogen.setup({
@@ -157,6 +159,7 @@ vim.lsp.enable {
     'roslyn',
     'clangd',
     'rust_analyzer',
+    'basedpyright',
 }
 
 local dap = require 'dap'
@@ -184,6 +187,16 @@ dap.configurations.zig = {
 }
 
 dap.configurations.c = {
+    {
+        type = 'lldb',
+        request = 'launch',
+        name = 'Launch File',
+        stopOnEntry = false,
+        args = {},
+    },
+}
+
+dap.configurations.cpp = {
     {
         type = 'lldb',
         request = 'launch',
@@ -325,7 +338,9 @@ vim.keymap.set({ 'n' }, '<leader>f?', builtin.man_pages)
 vim.keymap.set({ 'n' }, '<leader>fl', builtin.quickfix)
 vim.keymap.set({ 'n' }, '<leader>fr', builtin.resume)
 vim.keymap.set({ 'n' }, '<leader>f/', builtin.current_buffer_fuzzy_find)
-vim.keymap.set({ 'n' }, '<leader>fo', builtin.lsp_document_symbols)
+vim.keymap.set({ 'n' }, '<leader>fo', function()
+    builtin.lsp_document_symbols({ symbols = { 'function', 'method' } })
+end)
 
 -- Autocommands
 

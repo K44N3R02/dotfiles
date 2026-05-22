@@ -1,0 +1,287 @@
+# Created by Octave 10.3.0, Mon Feb 23 11:49:47 2026 +03 <k44n@5296.wls.metu.edu.tr>
+# name: local_packages
+# type: cell
+# rows: 1
+# columns: 2
+# name: <cell-element>
+# type: scalar struct
+# ndims: 2
+ 1 1
+# length: 14
+# name: name
+# type: sq_string
+# elements: 1
+# length: 9
+datatypes
+
+
+# name: version
+# type: sq_string
+# elements: 1
+# length: 5
+1.1.8
+
+
+# name: date
+# type: sq_string
+# elements: 1
+# length: 10
+2026-02-10
+
+
+# name: author
+# type: sq_string
+# elements: 1
+# length: 17
+Andreas Bertsatos
+
+
+# name: maintainer
+# type: sq_string
+# elements: 1
+# length: 42
+Andreas Bertsatos <abertsatos@biol.uoa.gr>
+
+
+# name: title
+# type: sq_string
+# elements: 1
+# length: 25
+Data Types for GNU Octave
+
+
+# name: description
+# type: sq_string
+# elements: 1
+# length: 83
+A package for providing extra data types  and related functionality for GNU Octave.
+
+
+# name: categories
+# type: sq_string
+# elements: 1
+# length: 9
+Datatypes
+
+
+# name: depends
+# type: cell
+# rows: 1
+# columns: 1
+# name: <cell-element>
+# type: scalar struct
+# ndims: 2
+ 1 1
+# length: 3
+# name: package
+# type: sq_string
+# elements: 1
+# length: 6
+octave
+
+
+# name: operator
+# type: sq_string
+# elements: 1
+# length: 2
+>=
+
+
+# name: version
+# type: sq_string
+# elements: 1
+# length: 5
+9.1.0
+
+
+
+
+
+
+
+# name: url
+# type: sq_string
+# elements: 1
+# length: 39
+https://github.com/pr0m1th3as/datatypes
+
+
+# name: tracker
+# type: sq_string
+# elements: 1
+# length: 46
+https://github.com/pr0m1th3as/datatypes/issues
+
+
+# name: dir
+# type: sq_string
+# elements: 1
+# length: 64
+/Users/k44n/.local/share/octave/api-v60/packages/datatypes-1.1.8
+
+
+# name: archprefix
+# type: sq_string
+# elements: 1
+# length: 64
+/Users/k44n/.local/share/octave/api-v60/packages/datatypes-1.1.8
+
+
+# name: loaded
+# type: bool
+0
+
+
+
+
+
+# name: <cell-element>
+# type: scalar struct
+# ndims: 2
+ 1 1
+# length: 16
+# name: name
+# type: sq_string
+# elements: 1
+# length: 2
+io
+
+
+# name: version
+# type: sq_string
+# elements: 1
+# length: 5
+2.7.1
+
+
+# name: date
+# type: sq_string
+# elements: 1
+# length: 10
+2025-02-03
+
+
+# name: author
+# type: sq_string
+# elements: 1
+# length: 15
+various authors
+
+
+# name: maintainer
+# type: sq_string
+# elements: 1
+# length: 41
+Philip Nienhuis <prnienhuis@users.sf.net>
+
+
+# name: title
+# type: sq_string
+# elements: 1
+# length: 12
+Input/Output
+
+
+# name: description
+# type: sq_string
+# elements: 1
+# length: 33
+Input/Output in external formats.
+
+
+# name: categories
+# type: sq_string
+# elements: 1
+# length: 2
+IO
+
+
+# name: problems
+# type: sq_string
+# elements: 1
+# length: 118
+Default initial Java memory probably too small, increase with java.opts (see documentation). UNO support experimental.
+
+
+# name: depends
+# type: cell
+# rows: 1
+# columns: 1
+# name: <cell-element>
+# type: scalar struct
+# ndims: 2
+ 1 1
+# length: 3
+# name: package
+# type: sq_string
+# elements: 1
+# length: 6
+octave
+
+
+# name: operator
+# type: sq_string
+# elements: 1
+# length: 2
+>=
+
+
+# name: version
+# type: sq_string
+# elements: 1
+# length: 5
+6.4.0
+
+
+
+
+
+
+
+# name: suggested
+# type: sq_string
+# elements: 1
+# length: 36
+windows (>= 1.2.1); Java JRE (> 1.8)
+
+
+# name: autoload
+# type: sq_string
+# elements: 1
+# length: 2
+no
+
+
+# name: license
+# type: sq_string
+# elements: 1
+# length: 22
+GPLv3+, simplified BSD
+
+
+# name: url
+# type: sq_string
+# elements: 1
+# length: 20
+http://octave.sf.net
+
+
+# name: dir
+# type: sq_string
+# elements: 1
+# length: 57
+/Users/k44n/.local/share/octave/api-v60/packages/io-2.7.1
+
+
+# name: archprefix
+# type: sq_string
+# elements: 1
+# length: 57
+/Users/k44n/.local/share/octave/api-v60/packages/io-2.7.1
+
+
+
+
+
+
+

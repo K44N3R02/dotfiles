@@ -10,6 +10,11 @@ after-login-command = [ ]
 after-startup-command = [
     'exec-and-forget sketchybar',
     'exec-and-forget ~/scripts/wifi-stat.zsh',
+    'exec-and-forget open -a "Hammerspoon.app"',
+    'exec-and-forget open -a "Obsidian.app"',
+    'workspace t',
+    'exec-and-forget open -a "Ghostty.app"',
+    'exec-and-forget sudo ~/bin/kanata/target/release/kanata -c ~/.config/kanata/kanata.kbd',
 ]
 
 exec-on-workspace-change = ['/bin/bash', '-c',
@@ -41,20 +46,9 @@ default-root-container-orientation = 'auto'
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 key-mapping.preset = 'qwerty'
 
-# Mouse follows focus when focused monitor changes
-# Drop it from your config, if you don't like this behavior
-# See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
-# See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 on-focus-changed = "move-mouse window-lazy-center"
 
-# Gaps between windows (inner-*) and between monitor edges (outer-*).
-# Possible values:
-# - Constant:     gaps.outer.top = 8
-# - Per monitor:  gaps.outer.top = [{ monitor.main = 16 }, { monitor."some-pattern" = 32 }, 24]
-#                 In this example, 24 is a default value when there is no match.
-#                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
-#                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
 inner.horizontal = 4
 inner.vertical =   4
@@ -63,8 +57,6 @@ outer.bottom =     4
 outer.top =        4
 outer.right =      4
 
-# 'main' binding mode declaration
-# See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # 'main' binding mode must be always presented
 [mode.main.binding]
 
@@ -81,74 +73,20 @@ outer.right =      4
 
 # All possible modifiers: cmd, alt, ctrl, shift
 
-# All possible commands: https://nikitabobko.github.io/AeroSpace/commands
-
-# You can uncomment this line to open up terminal with alt + enter shortcut
-# See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
-# alt-enter = 'exec-and-forget open -n /System/Applications/Utilities/Terminal.app'
 
 cmd-h = []
 cmd-alt-h = []
 cmd-m = []
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#layout
-alt-slash = 'layout tiles horizontal vertical'
-alt-comma = 'layout accordion horizontal vertical'
-
-# See: https://nikitabobko.github.io/AeroSpace/commands#focus
-alt-h = 'focus left'
-alt-j = 'focus down'
-alt-k = 'focus up'
-alt-l = 'focus right'
-
-# See: https://nikitabobko.github.io/AeroSpace/commands#move
-alt-shift-h = 'move left'
-alt-shift-j = 'move down'
-alt-shift-k = 'move up'
-alt-shift-l = 'move right'
-
-# See: https://nikitabobko.github.io/AeroSpace/commands#resize
-alt-shift-minus = 'resize smart -50'
-alt-shift-equal = 'resize smart +50'
-
-alt-shift-f = 'fullscreen'
-
-# App launchers
-ctrl-alt-shift-t = ['workspace t', 'exec-and-forget open -a "Ghostty.app"']
-ctrl-alt-shift-o = ['workspace o', 'exec-and-forget open -a "Obsidian.app"']
-ctrl-alt-shift-b = ['workspace b', 'exec-and-forget open -a "qutebrowser"']
-ctrl-alt-shift-w = ['workspace w', 'exec-and-forget open -a "WhatsApp.app"']
-ctrl-alt-shift-u = ['workspace u', ]
-ctrl-alt-shift-m = ['workspace m', 'exec-and-forget open -a "Mail.app"']
-ctrl-alt-shift-a = ['workspace a', 'exec-and-forget open -a "Activity Monitor.app"']
-ctrl-alt-shift-f = ['workspace f', 'exec-and-forget open -a "Finder.app"']
-ctrl-alt-shift-k = ['workspace k', 'exec-and-forget open -a "Sabaki.app"']
-ctrl-alt-shift-v = ['workspace v', 'exec-and-forget code']
-ctrl-alt-shift-p = 'exec-and-forget open -a "Bitwarden.app"'
-
-ctrl-alt-shift-z = 'exec-and-forget ~/scripts/toggle_zen.sh'
-
-# Move between workspaces
-cmd-ctrl-alt-shift-t = ['move-node-to-workspace t', 'workspace t']
-cmd-ctrl-alt-shift-o = ['move-node-to-workspace o', 'workspace o']
-cmd-ctrl-alt-shift-b = ['move-node-to-workspace b', 'workspace b']
-cmd-ctrl-alt-shift-w = ['move-node-to-workspace w', 'workspace w']
-cmd-ctrl-alt-shift-u = ['move-node-to-workspace u', 'workspace u']
-cmd-ctrl-alt-shift-m = ['move-node-to-workspace m', 'workspace m']
-cmd-ctrl-alt-shift-a = ['move-node-to-workspace a', 'workspace a']
-cmd-ctrl-alt-shift-f = ['move-node-to-workspace f', 'workspace f']
-cmd-ctrl-alt-shift-k = ['move-node-to-workspace k', 'workspace k']
-
-# See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
-# See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
 alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#mode
-ctrl-alt-shift-comma = 'mode service'
+# ctrl-shift-f1 is saved for Raycast
+ctrl-shift-f2 = 'mode service'
+ctrl-shift-f3 = 'mode launch'
+ctrl-shift-f4 = 'mode switch'
+ctrl-shift-f5 = 'mode window'
 
-# 'service' binding mode declaration.
-# See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
 esc = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
@@ -161,7 +99,62 @@ j = ['join-with down', 'mode main']
 k = ['join-with up', 'mode main']
 l = ['join-with right', 'mode main']
 
+z = ['exec-and-forget ~/scripts/toggle_zen.sh', 'mode main']
+
+[mode.launch.binding]
+t = ['workspace t', 'exec-and-forget open -a "Ghostty.app"',       'mode main']
+o = ['workspace o', 'exec-and-forget open -a "Obsidian.app"',      'mode main']
+b = ['workspace b', 'exec-and-forget open -a "Brave Browser.app"', 'mode main']
+w = ['workspace w', 'exec-and-forget open -a "WhatsApp.app"',      'mode main']
+m = ['workspace m', 'exec-and-forget open -a "Mail.app"',          'mode main']
+f = ['workspace f', 'exec-and-forget open -a "Finder.app"',        'mode main']
+k = ['workspace k', 'exec-and-forget open -a "Sabaki.app"',        'mode main']
+v = ['workspace v', 'exec-and-forget code',                        'mode main']
+p = [               'exec-and-forget open -a "Bitwarden.app"',     'mode main']
+u = ['workspace u',                                                'mode main']
+esc = 'mode main'
+
+[mode.switch.binding]
+t = ['move-node-to-workspace t', 'workspace t', 'mode main']
+o = ['move-node-to-workspace o', 'workspace o', 'mode main']
+b = ['move-node-to-workspace b', 'workspace b', 'mode main']
+w = ['move-node-to-workspace w', 'workspace w', 'mode main']
+m = ['move-node-to-workspace m', 'workspace m', 'mode main']
+f = ['move-node-to-workspace f', 'workspace f', 'mode main']
+k = ['move-node-to-workspace k', 'workspace k', 'mode main']
+v = ['move-node-to-workspace v', 'workspace v', 'mode main']
+u = ['move-node-to-workspace u', 'workspace u', 'mode main']
+esc = 'mode main'
+
+[mode.window.binding]
+minus = 'resize smart -50'
+shift-equal = 'resize smart +50'
+equal = 'balance-sizes'
+f = 'fullscreen'
+
+h = 'focus left'
+j = 'focus down'
+k = 'focus up'
+l = 'focus right'
+
+shift-h = 'move left'
+shift-j = 'move down'
+shift-k = 'move up'
+shift-l = 'move right'
+
+t = 'layout tiles horizontal vertical'
+a = 'layout accordion horizontal vertical'
+
+esc = 'mode main'
+
 [[on-window-detected]]
 if.app-id = 'com.apple.AppStore'
 run = ['layout floating']
 
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+run = ['move-node-to-workspace o']
+
+[[on-window-detected]]
+if.app-id = 'net.ankiweb.launcher'
+run = ['layout floating']

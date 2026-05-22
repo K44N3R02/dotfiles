@@ -15,6 +15,22 @@ export PATH=$GOPATH/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH
 
+# Added by Obsidian
+export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
+
+# Java Version Switching
+export JAVA_8_HOME=$(/usr/libexec/java_home -v 1.8)
+export JAVA_25_HOME=$(/usr/libexec/java_home -v 25)
+
+alias java8='export JAVA_HOME=$JAVA_8_HOME; java'
+alias java25='export JAVA_HOME=$JAVA_25_HOME; java'
+
+# Set a default version (Optional - e.g., keep 25 as default)
+export JAVA_HOME=$JAVA_25_HOME
+
+# Set default editor
+export EDITOR='nvim'
+
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -45,6 +61,11 @@ zinit snippet OMZP::sudo
 # Load completions
 autoload -U compinit && compinit
 zinit cdreplay -q
+
+# Load edit line
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -87,19 +108,18 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 # Aliases
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
 alias bbic='brew update && brew bundle install --cleanup --file=~/Brewfile && brew upgrade'
-alias ls='ls --color'
+alias ll='ls -l'
+alias la='ls -la'
+alias lh='ls -lah'
+alias vi='nvim'
 alias c='clear'
 alias kanata='~/bin/kanata/target/release/kanata'
 k() {
   sudo ~/bin/kanata/target/release/kanata -c ~/.config/kanata/kanata.kbd
 }
-alias zi='__zoxide_zi'
 alias digital='/opt/homebrew/Caskroom/digital/0.31/Digital/Digital.sh'
 
-. ~/.local/share/bob/env/env.sh
-
-hash -d sync=/Users/k44n/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/sync/sync
+hash -d sync=/Users/k44n/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/sync
 
 # Shell integrations
 eval "$(fzf --zsh)"
-eval "$(zoxide init zsh)"

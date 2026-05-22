@@ -38,36 +38,27 @@
   nop0 🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉   🔊
        1    2    3    4    5    lrld 6    7    8    9    0    XX   bspc
   tab  q    w    f    p    b    [    j    l    u    y    '    bspc ret
-  esc  a    r    @s   @t   g    ]    m    @n   @e   i    o    ret
-  z    x    c    @d    v   @_   @#   k    @h    ,   .    @?
-       lalt XX             @spc           @tmb1 XX
-)
-
-(deflayer nomod
-  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
-       1    2    3    4    5    6    7    8    9    0    -    =   bspc
-  @bas q    w    f    p    b    [    j    l    u    y    ;    bspc ret
-  caps a    r    s    t    g    ]    m    n    e    i    o    ret
+  esc  a    @r   @s   @t   g    ]    m    @n   @e   @i   o    ret
   z    x    c    d    v    @_   @#   k    h    ,    .    @?
-       lalt lmet           spc            rmet ralt
+       lalt XX             @spc           @tmb XX
 )
 
-(deflayer symbol-oneshot
+;;(deflayer nomod
+;;  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+;;       1    2    3    4    5    6    7    8    9    0    -    =   bspc
+;;  @bas q    w    f    p    b    [    j    l    u    y    ;    bspc ret
+;;  caps a    r    s    t    g    ]    m    n    e    i    o    ret
+;;  z    x    c    d    v    @_   @#   k    h    ,    .    @?
+;;       lalt lmet           spc            rmet ralt
+;;)
+
+(deflayer symbol
   nop0 f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
        1    2    3    4    5    lrld 6    7    8    9    0    XX   bspc
   tab  `    @<   @>   min  @|   XX   @^   @{   @}   @$   \    bspc ret
   esc  @!   @*   /    =    @&   XX   @#   @lp  @rp  ;    S-'  ret
   @~   @+   [    ]    @%   @_   XX   @@   @:   ,    .    '
-       lalt XX             @spc           @tmb2 XX
-)
-
-(deflayer symbol-persistent
-  nop0 f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
-       1    2    3    4    5    lrld 6    7    8    9    0    XX   bspc
-  tab  `    @<   @>   min  @|   XX   @^   @{   @}   @$   \    bspc ret
-  @bas @!   @*   /    =    @&   XX   @#   @lp  @rp  ;    S-'  ret
-  @~   @+   [    ]    @%   @_   XX   @@   @:   ,    .    '
-       lalt XX             @spc           nop0 XX
+       lalt XX             spc            nop0 XX
 )
 
 ;;(deflayer number
@@ -87,20 +78,13 @@
 
 (defalias
   ;; define home row mods
+  r (tap-hold-release $tap-time $hold-time-long r (layer-while-held symbol))
   s (tap-hold-release $tap-time $hold-time-long s lalt)
   t (tap-hold-release $tap-time $hold-time-long t lmet)
   n (tap-hold-release $tap-time $hold-time-long n rmet)
   e (tap-hold-release $tap-time $hold-time-long e ralt)
+  i (tap-hold-release $tap-time $hold-time-long i (layer-while-held symbol))
 
-  d (tap-hold-release $tap-time $hold-time-long d (multi lctl lalt lsft))
-  h (tap-hold-release $tap-time $hold-time-long h (multi lctl lalt lsft))
-
-  sym-o (one-shot $one-shot-time (layer-while-held symbol-oneshot))
-  sym-p (layer-switch symbol-persistent)
-;;  num (layer-switch number)
-  bas (layer-switch base)
-
-  spc (tap-hold-release $tap-time $hold-time spc lsft)
-  tmb1 (tap-hold-release $tap-time $hold-time @sym-o rctl)
-  tmb2 (tap-hold-release $tap-time $hold-time @sym-p rctl)
+  spc spc
+  tmb (tap-hold-release $tap-time $hold-time (one-shot $one-shot-time lsft) rctl)
 )

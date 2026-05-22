@@ -1,0 +1,108 @@
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]   \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  `    z    x    c    v    b    n    m    ,    .    /    rsft
+       lalt lmet           spc            rmet ralt
+)
+
+(defalias
+  ! S-1
+  @ S-2
+  # S-3
+  $ S-4
+  % S-5
+  ^ S-6
+  & S-7
+  * S-8
+  lp S-9
+  rp S-0
+  _ S-min
+  + S-=
+  { S-[
+  } S-]
+  : S-;
+  | S-\
+  < S-,
+  > S-.
+  ? S-/
+  ~ S-`
+)
+
+(deflayer base
+  lrld 🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉   🔊
+  tab  q    w    f    p    b    XX   j    l    u    y    '    bspc ret
+  esc  @a   @r   @s   @t   g    XX   m    @n   @e   @i   @o   ret
+      @z   @x   @c   d   @v  XX XX   k    h    ,    .    @?
+       lalt XX             @spc           @tmb XX
+)
+
+(deflayer symbol
+  nop0 f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  tab  `    @<   @>   @*   @|   XX   @^   @{   @}   @$   \    bspc ret
+  esc  @!   @+   min  =    @&   XX   @_   @lp  @rp  ;    S-'  ret
+      @~   [    ]    /    @% XX XX   @@   @:   ,    .    @#
+       lalt XX             spc            nop0 XX
+)
+
+(deflayer numpad
+  lrld 🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉   🔊
+  tab  XX   XX   XX   XX   b    XX   j    XX   XX   XX   XX   bspc ret
+  esc  1    2    3    4    5    XX   6    7    8    9    0    ret
+      XX   XX   XX   XX   v  XX XX   k    h    ,    .    @?
+       lalt XX             nop0           spc  XX
+)
+
+(deflayer extend
+  lrld 🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉   🔊
+  tab  XX   @win XX   XX   XX   XX   XX   @lnc XX   XX   XX  bspc ret
+  esc  XX   XX   @swc XX   XX   XX   XX   XX   XX   XX   XX   ret
+      XX   XX   XX   XX   XX XX XX   XX   XX   XX   @srv XX
+       lalt XX             @spc           @ray XX
+)
+
+(defvar
+  tap-time 200
+  hold-time 200
+  hold-time-long 400
+  dance-time 200
+  chord-time 32
+  one-shot-time 2000
+  one-shot-time-long 20000
+)
+
+(defalias
+  ;; define home row mods
+  a (tap-hold-release $tap-time $hold-time a lmet)
+  r (tap-hold-release $tap-time $hold-time r lalt)
+  s (tap-hold-release $tap-time $hold-time s lsft)
+  t (tap-hold-release $tap-time $hold-time t lctl)
+
+  n (tap-hold-release $tap-time $hold-time n rctl)
+  e (tap-hold-release $tap-time $hold-time e rsft)
+  i (tap-hold-release $tap-time $hold-time i ralt)
+  o (tap-hold-release $tap-time $hold-time o rmet)
+
+  ;; common actions
+  z (tap-hold $tap-time $hold-time-long z M-z)
+  x (tap-hold $tap-time $hold-time-long x M-x)
+  c (tap-hold $tap-time $hold-time-long c M-c)
+  v (tap-hold $tap-time $hold-time-long v M-v)
+
+  ;; thumbs
+  spc (tap-hold-release $tap-time $hold-time spc (layer-while-held numpad))
+  tmb (tap-hold-release $tap-time $hold-time
+                        (one-shot $one-shot-time-long (layer-while-held extend))
+                        (layer-while-held symbol))
+
+  ;; window management
+  ray C-S-f1 ;; raycast shortcut
+  srv C-S-f2 ;; aerospace service mode shortcut
+  lnc C-S-f3 ;; aerospace launch mode shortcut
+  swc C-S-f4 ;; aerospace switch mode shortcut
+  win C-S-f5 ;; aerospace window mode shortcut
+)
