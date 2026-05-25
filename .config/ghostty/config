@@ -15,5 +15,5 @@ keybind = ctrl+f>minus=set_font_size:18.0
 keybind = ctrl+f>equal=set_font_size:22.0
 keybind = ctrl+f>shift+equal=set_font_size:28.0
 
-custom-shader = ~/.config/ghostty/ghostty-shaders/tft.glsl
+# custom-shader = ~/.config/ghostty/ghostty-shaders/tft.glsl
 

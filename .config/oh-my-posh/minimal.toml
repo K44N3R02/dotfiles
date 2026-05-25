@@ -1,0 +1,87 @@
+console_title_template = '{{ .Shell }} in {{ .Folder }}'
+version = 4
+final_space = true
+
+[palette]
+  base = '#232136'
+  surface = '#2A273F'
+  overlay = '#393552'
+  muted = '#6E6A86'
+  subtle = '#908CAA'
+  text = '#E0DEF4'
+  love = '#EB6F92'
+  gold = '#F6C177'
+  rose = '#EA9A97'
+  pine = '#3E8FB0'
+  foam = '#9CCFD8'
+  iris = '#C4A7E7'
+  highlightLow = '#2A283E'
+  highlightMed = '#44415A'
+  highlightHigh = '#56526E'
+
+[upgrade]
+  source = 'cdn'
+  interval = '168h'
+  auto = false
+  notice = false
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    type = 'path'
+    style = 'plain'
+    background = 'transparent'
+    foreground = 'p:pine'
+    template = '{{ .Path }}'
+
+    [blocks.segments.properties]
+      style = 'full'
+
+  [[blocks.segments]]
+    type = 'git'
+    style = 'plain'
+    background = 'transparent'
+    foreground = 'p:rose'
+    template = ' {{ .HEAD }}{{if gt .Behind 0}}↓{{end}}{{if gt .Ahead 0}}↑{{end}}<p:foam>{{if or (.Staging.Changed) (.Working.Changed) (gt .StashCount 0)}} {{if gt .StashCount 0}}*{{end}}{{if .Staging.Changed}}+{{end}}{{if gt (add .Working.Modified .Working.Deleted) 0}}!{{end}}{{if gt .Working.Untracked 0}}?{{end}}{{end}}</>'
+
+    [blocks.segments.properties]
+      branch_icon = ''
+      fetch_status = true
+      commit_icon = '@'
+
+  [[blocks.segments]]
+    type = 'executiontime'
+    style = 'plain'
+    background = 'transparent'
+    foreground = 'p:muted'
+    template = ' {{ .FormattedMs }}'
+
+    [blocks.segments.properties]
+      threshold = 5000
+      style = 'round'
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    type = 'text'
+    style = 'plain'
+    background = 'transparent'
+    foreground_templates = [
+      '{{if gt .Code 0}}p:love{{end}}',
+      '{{if eq .Code 0}}p:iris{{end}}',
+    ]
+    template = '❯'
+
+[transient_prompt]
+  background = 'transparent'
+  foreground_templates = [
+    '{{if gt .Code 0}}p:love{{end}}',
+    '{{if eq .Code 0}}p:iris{{end}}',
+  ]
+  template = '❯ '
