@@ -7,6 +7,7 @@ vim.opt.relativenumber = true
 vim.opt.signcolumn = 'yes'
 vim.opt.colorcolumn = '81'
 vim.opt.mouse = 'a'
+vim.opt.mousescroll = 'ver:0,hor:0'
 vim.opt.breakindent = true
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
@@ -20,7 +21,6 @@ vim.opt.inccommand = 'split'
 vim.opt.scrolloff = 8
 vim.opt.linebreak = true
 vim.opt.guicursor = 'a:block,r-cr:hor20,o:hor50,i-ci:blinkwait700-blinkoff400-blinkon250'
-vim.opt.winborder = 'rounded'
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
@@ -28,34 +28,26 @@ vim.opt.undofile = true
 
 -- # Plugins
 vim.pack.add {
-    { src = 'https://github.com/rose-pine/neovim',                name = 'rosepine' },
+    -- file management
     { src = 'https://github.com/stevearc/oil.nvim',               name = 'oil.nvim' },
-    { src = 'https://github.com/neovim/nvim-lspconfig',           name = 'nvim-lspconfig' },
---    { src = 'https://github.com/nvim-treesitter/nvim-treesitter', name = 'nvim-treesitter' },
-    { src = 'https://github.com/mason-org/mason.nvim',            name = 'mason.nvim' },
-    { src = 'https://github.com/Saghen/blink.cmp',                name = 'blink.cmp' },
+    -- snippets
     { src = 'https://github.com/L3MON4D3/LuaSnip',                name = 'LuaSnip' },
-    { src = 'https://github.com/danymat/neogen',                  name = 'neogen' },
+    -- better search
     { src = 'https://github.com/nvim-lua/plenary.nvim',           name = 'plenary.nvim' },
     { src = 'https://github.com/nvim-telescope/telescope.nvim',   name = 'telescope.nvim' },
-
-    { src = 'https://github.com/mfussenegger/nvim-dap',           name = 'nvim-dap' },
-
-    -- Creates a beautiful debugger UI
-    { src = 'https://github.com/rcarriga/nvim-dap-ui',            name = 'nvim-dap-ui' },
-
-    -- Required dependency for nvim-dap-ui
-    { src = 'https://github.com/nvim-neotest/nvim-nio',           name = 'nvim-nio' },
-
-    -- Installs the debug adapters for you
-    { src = 'https://github.com/jay-babu/mason-nvim-dap.nvim',    name = 'mason-nvim-dap.nvim' },
-
-    -- Show values inline while debugging
-    { src = 'https://github.com/theHamsta/nvim-dap-virtual-text', name = 'nvim-dap-virtual-text' },
-
+    -- LSP
+    { src = 'https://github.com/neovim/nvim-lspconfig',           name = 'nvim-lspconfig' },
+    { src = 'https://github.com/mason-org/mason.nvim',            name = 'mason.nvim' },
     { src = 'https://github.com/seblyng/roslyn.nvim',             name = 'roslyn.nvim' },
-    { src = 'https://github.com/tpope/vim-obsession',             name = 'vim-obsession' },
+    -- visual
+    { src = 'https://github.com/rose-pine/neovim',                name = 'rosepine' },
     { src = 'https://github.com/lewis6991/gitsigns.nvim',         name = 'gitsigns.nvim' },
+    -- for integrate with my tmux config
+    { src = 'https://github.com/christoomey/vim-tmux-navigator',  name = 'vim-tmux-navigator' },
+    { src = 'https://github.com/tpope/vim-obsession',             name = 'vim-obsession' },
+    -- enhancing text edit operators and text objects
+    { src = 'https://github.com/nvim-mini/mini.surround',         name = 'mini.surround' },
+    { src = 'https://github.com/nvim-mini/mini.ai',               name = 'mini.ai' },
 }
 
 local rosepine = require('rose-pine')
@@ -65,8 +57,16 @@ rosepine.setup {
         italic = false,
         transparency = true,
     },
+    highlight_groups = {
+        Pmenu = { bg = 'surface' },
+        PmenuSel = { bg = 'overlay', fg = 'text' },
+        PmenuSbar = { bg = 'surface' },
+        PmenuThumb = { bg = 'muted' },
+        NormalFloat = { bg = 'surface' },
+        FloatBorder = { bg = 'surface', fg = 'highlight_med' },
+    }
 }
-vim.cmd 'colorscheme rose-pine-moon'
+vim.cmd [[colorscheme rose-pine-moon]]
 
 local oil = require('oil')
 oil.setup()
@@ -74,70 +74,9 @@ oil.setup()
 local telescope = require('telescope')
 telescope.setup()
 
-
--- local treesitter = require('nvim-treesitter')
--- local treesitter_configs = require('nvim-treesitter.configs')
--- treesitter.setup()
--- treesitter_configs.setup({
---     highlight = { enable = false },
--- })
-
 local luasnip = require('luasnip')
 luasnip.setup({ enable_autosnippets = true })
-require('luasnip.loaders.from_lua').load({ paths = '~/.config/nvim/snippets/' })
-
-local neogen = require('neogen')
-neogen.setup({
-    snippet_engine = 'luasnip',
-    languages = {
-        cs = { template = { annotation_convention = 'xmldoc' } },
-        c = {
-            template = {
-                annotation_convention = 'kerneldoc',
-                kerneldoc = {
-                    { nil,                "/**" },
-                    { nil,                " * %s() - $1",  { type = { "func" } } },
-                    { "parameters",       " * @%s: $1" },
-                    { "vararg",           " * @...: $1" },
-                    { nil,                " *\n * $1\n *" },
-                    { nil,                " * Context: $1" },
-                    { "return_statement", " * Return: $1" },
-                    { nil,                " */" },
-                }
-            }
-        },
-    },
-})
-
-local blink = require('blink.cmp')
-blink.setup({
-    keymap = { preset = 'default' },
-    appearance = { nerd_font_variant = 'mono' },
-    fuzzy = { implementation = 'lua' },
-    completion = {
-        accept = {
-            dot_repeat = true,
-            auto_brackets = { enabled = false },
-        },
-        menu = {
-            draw = {
-                columns = { { 'label', gap = 1 }, { 'kind', gap = 1 }, { 'source_name' } },
-                components = {
-                    source_name = {
-                        width = { max = 30 },
-                        text = function(ctx) return '[' .. ctx.source_name .. ']' end,
-                        highlight = 'BlinkCmpSource',
-                    },
-                },
-            },
-        },
-        documentation = { auto_show = true },
-    },
-    sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
-    },
-    snippets = { preset = 'luasnip' },
-})
+require('luasnip.loaders.from_snipmate').load({ paths = '~/.config/nvim/snippets/' })
 
 local mason = require('mason')
 mason.setup({
@@ -148,12 +87,6 @@ mason.setup({
 local roslyn = require('roslyn')
 roslyn.setup()
 
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- vim.lsp.config('omnisharp', {
---     cmd = { 'omnisharp-mono', '--languageserver', '--hostPID', tostring(vim.fn.getpid()) },
---     capabilities = capabilities,
--- })
-
 vim.lsp.enable {
     'lua_ls',
     'roslyn',
@@ -162,92 +95,27 @@ vim.lsp.enable {
     'basedpyright',
 }
 
-local dap = require 'dap'
-local dapui = require 'dapui'
+vim.o.autocomplete = true
+vim.o.completeopt = 'menuone,noselect,popup,fuzzy'
+vim.o.pumheight = 8
 
-require('nvim-dap-virtual-text').setup {}
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('lsp-autocomplete', { clear = true }),
+    callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        if client and client:supports_method('textDocument/completion') then
+            vim.lsp.completion.enable(true, client.id, ev.buf, {
+                autotrigger = true
+            })
+        end
+    end,
+})
 
--- https://terminalprogrammer.com/neovim-setup-for-zig#heading-debugger
-dap.adapters.lldb = {
-    type = 'executable',
-    command = '/usr/bin/lldb',
-    name = 'lldb',
-}
+local mini_surround = require('mini.surround')
+mini_surround.setup {}
 
-dap.configurations.zig = {
-    {
-        type = 'lldb',
-        request = 'launch',
-        name = 'Launch File',
-        program = '${workspaceFolder}/zig-out/bin/zox',
-        cwd = '${workspaceFolder}',
-        stopOnEntry = false,
-        args = {},
-    },
-}
-
-dap.configurations.c = {
-    {
-        type = 'lldb',
-        request = 'launch',
-        name = 'Launch File',
-        stopOnEntry = false,
-        args = {},
-    },
-}
-
-dap.configurations.cpp = {
-    {
-        type = 'lldb',
-        request = 'launch',
-        name = 'Launch File',
-        stopOnEntry = false,
-        args = {},
-    },
-}
-
-require('mason-nvim-dap').setup {
-    -- Makes a best effort to setup the various debuggers with
-    -- reasonable debug configurations
-    automatic_installation = true,
-
-    -- You can provide additional configuration to the handlers,
-    -- see mason-nvim-dap README for more information
-    handlers = {},
-
-    -- You'll need to check that you have the required things installed
-    -- online, please don't ask me how to install them :)
-    ensure_installed = {
-        -- Update this to ensure that you have the debuggers for the langs you want
-        'delve',
-    },
-}
-
--- Dap UI setup
--- For more information, see |:help nvim-dap-ui|
-dapui.setup {
-    -- Set icons to characters that are more likely to work in every terminal.
-    --    Feel free to remove or use ones that you like more! :)
-    --    Don't feel like these are good choices.
-    icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
-    controls = {
-        icons = {
-            pause = '⏸',
-            play = '▶',
-            step_into = '⏎',
-            step_over = '⏭',
-            step_out = '⏮',
-            step_back = 'b',
-            run_last = '▶▶',
-            terminate = '⏹',
-            disconnect = '⏏',
-        },
-    },
-}
-
-dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-dap.listeners.before.event_exited['dapui_config'] = dapui.close
+local mini_ai = require('mini.ai')
+mini_ai.setup {}
 
 -- # Keymaps
 vim.keymap.set({ 'n' }, '<esc>', '<cmd>nohlsearch<cr>')
@@ -266,17 +134,6 @@ for i = 1, 4 do
     vim.keymap.set({ 'n' }, '<leader>' .. i, ':cc ' .. i .. '<cr>')
 end
 
-vim.keymap.set({ 'n' }, '<leader>A', function()
-    vim.fn.setqflist(
-        { {
-            filename = vim.fn.expand('%'),
-            lnum = 1,
-            col = 1,
-            text = vim.fn.expand('%')
-        } },
-        'a')
-end, { desc = 'Add current file to quickfix list' })
-
 vim.keymap.set({ 'n' }, '<leader>a', function()
     vim.fn.setqflist(
         { {
@@ -287,18 +144,6 @@ vim.keymap.set({ 'n' }, '<leader>a', function()
         } },
         'a')
 end, { desc = 'Add current line to quickfix list' })
-
-vim.keymap.set({ 'v', 'x' }, '<leader>a', function()
-    local lnum = math.min(vim.fn.line('.'), vim.fn.line('v'))
-    vim.fn.setqflist(
-        { {
-            filename = vim.fn.expand('%'),
-            lnum = lnum,
-            col = 1,
-            text = vim.fn.getline(lnum):gsub('^%s+', '')
-        } },
-        'a')
-end, { desc = 'Add current block\'s first line to quickfix list' })
 
 vim.api.nvim_create_autocmd('BufWinEnter', {
     pattern = '*',
@@ -327,8 +172,6 @@ vim.keymap.set({ 'n' }, '<leader>la', vim.lsp.buf.code_action)
 vim.keymap.set({ 'i' }, '<C-e>', function() luasnip.expand_or_jump(1) end, { silent = true })
 vim.keymap.set({ 'i', 's' }, '<C-l>', function() luasnip.jump(1) end, { silent = true })
 vim.keymap.set({ 'i', 's' }, '<C-h>', function() luasnip.jump(-1) end, { silent = true })
-
-vim.keymap.set({ 'n' }, '<leader>ld', neogen.generate)
 
 local builtin = require('telescope.builtin')
 vim.keymap.set({ 'n' }, '<leader><leader>', builtin.buffers)
@@ -374,9 +217,9 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
     group = c_linux_kernel_tabs,
     pattern = '*.{c,cpp,h,hpp,cc,hh}',
     callback = function()
-        vim.bo.tabstop = 8   -- Number of spaces that a <Tab> counts for
-        vim.bo.softtabstop = 8 -- Number of spaces that a <Tab> counts for while editing
-        vim.bo.shiftwidth = 8 -- Number of spaces to use for each step of (auto)indent
+        vim.bo.tabstop = 8       -- Number of spaces that a <Tab> counts for
+        vim.bo.softtabstop = 8   -- Number of spaces that a <Tab> counts for while editing
+        vim.bo.shiftwidth = 8    -- Number of spaces to use for each step of (auto)indent
         vim.bo.expandtab = false -- Use actual tab characters instead of spaces
     end,
 })
@@ -388,10 +231,9 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
     group = c_linux_kernel_tabs,
     pattern = '*/Makefile',
     callback = function()
-        vim.bo.tabstop = 8   -- Number of spaces that a <Tab> counts for
-        vim.bo.softtabstop = 8 -- Number of spaces that a <Tab> counts for while editing
-        vim.bo.shiftwidth = 8 -- Number of spaces to use for each step of (auto)indent
+        vim.bo.tabstop = 8       -- Number of spaces that a <Tab> counts for
+        vim.bo.softtabstop = 8   -- Number of spaces that a <Tab> counts for while editing
+        vim.bo.shiftwidth = 8    -- Number of spaces to use for each step of (auto)indent
         vim.bo.expandtab = false -- Use actual tab characters instead of spaces
     end,
 })
-

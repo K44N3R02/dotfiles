@@ -98,7 +98,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
-alias bbic='brew update && brew bundle install --cleanup --file=~/Brewfile && brew upgrade'
+alias bbic='brew update && brew bundle install --force --cleanup --file=~/Brewfile && brew upgrade'
 alias ll='ls -l'
 alias la='ls -la'
 alias lh='ls -lah'
@@ -107,6 +107,9 @@ alias c='clear'
 alias kanata='~/bin/kanata/target/release/kanata'
 k() {
   sudo ~/bin/kanata/target/release/kanata -c ~/.config/kanata/kanata.kbd
+}
+sio() {
+  sioyek $1 &>/dev/null &
 }
 alias digital='/opt/homebrew/Caskroom/digital/0.31/Digital/Digital.sh'
 

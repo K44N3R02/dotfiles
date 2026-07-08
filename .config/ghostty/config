@@ -11,9 +11,9 @@ macos-titlebar-style = hidden
 title = " "
 
 keybind = global:cmd+ctrl+t=toggle_quick_terminal
-keybind = ctrl+f>minus=set_font_size:18.0
-keybind = ctrl+f>equal=set_font_size:22.0
-keybind = ctrl+f>shift+equal=set_font_size:28.0
+keybind = cmd+f>minus=set_font_size:18.0
+keybind = cmd+f>equal=set_font_size:22.0
+keybind = cmd+f>shift+equal=set_font_size:28.0
 
 # custom-shader = ~/.config/ghostty/ghostty-shaders/tft.glsl
 

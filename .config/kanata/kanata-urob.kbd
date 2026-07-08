@@ -1,7 +1,9 @@
+;; Credit: https://www.reddit.com/r/ErgoMechKeyboards/comments/1qosvc0/a_try_on_urobs_timeless_home_row_mods_for_kanata/
 (defcfg
   process-unmapped-keys yes
 )
 
+;; physical layout of keys
 (defsrc
   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
   tab  q    w    e    r    t    y    u    i    o    p    [    ]   \
@@ -10,6 +12,7 @@
        lalt lmet           spc            rmet ralt
 )
 
+;; symbol convenience aliases
 (defalias
   ! S-1
   @ S-2
@@ -35,15 +38,23 @@
 
 (deflayer base
   lrld 🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉   🔊
-  tab  q    w    f    p    b    XX   j    l    u    y    '    bspc ret
+  tab  q    w    f    p    b    XX   j    l    u    y    '    @bsp ret
   esc  @a   @r   @s   @t   g    XX   m    @n   @e   @i   @o   ret
       @z   @x   @c   d   @v  XX XX   k    h    ,    .    @?
        lalt XX             @spc           @tmb XX
 )
 
+(deflayer nomods
+  lrld 🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉   🔊
+  tab  q    w    f    p    b    XX   j    l    u    y    '    @bsp ret
+  esc   a    r    s    t   g    XX   m    n    e    i    o   ret
+       z    x    c   d    v  XX XX   k    h    ,    .    @?
+       lalt XX             @spc           @tmb XX
+)
+
 (deflayer symbol
   nop0 f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
-  tab  `    @<   @>   @*   @|   XX   @^   @{   @}   @$   \    bspc ret
+  tab  `    @<   @>   @*   @|   XX   @^   @{   @}   @$   \    @bsp ret
   esc  @!   min  @+   =    @&   XX   @_   @lp  @rp  ;    S-'  ret
       @~   [    ]    /    @% XX XX   @@   @:   ,    .    @#
        lalt XX             spc            nop0 XX
@@ -51,7 +62,7 @@
 
 (deflayer numpad
   lrld 🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉   🔊
-  tab  XX   XX   XX   XX   b    XX   j    XX   XX   XX   XX   bspc ret
+  tab  XX   XX   XX   XX   b    XX   j    XX   XX   XX   XX   @bsp ret
   esc  1    2    3    4    5    XX   6    7    8    9    0    ret
       XX   XX   XX   XX   v  XX XX   k    h    ,    .    @?
        lalt XX             nop0           spc  XX
@@ -59,42 +70,82 @@
 
 (deflayer extend
   lrld 🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉   🔊
-  tab  XX   @win XX   XX   XX   XX   XX   @lnc XX   XX   XX  bspc ret
+  tab  XX   @win XX   XX   XX   XX   XX   @lnc XX   XX   XX  @bsp ret
   esc  XX   XX   @swc XX   XX   XX   XX   XX   XX   XX   XX   ret
       XX   XX   XX   XX   XX XX XX   XX   XX   @srv XX   XX
        lalt XX             @spc           @ray XX
 )
 
+;; home row mods parameters
 (defvar
   tap-time 200
   hold-time 200
-  hold-time-long 600
   dance-time 200
   chord-time 32
   one-shot-time 2000
   one-shot-time-long 20000
+  require-prior-idle 250
+
+  left-side-keys (q w e r t a s d f g ` z x c v)
+  left-home-row-keys (a s d f)
+  right-side-keys (u i o p [ j k l ; ' m . / rsft)
+  right-home-row-keys (k l ; ')
+)
+
+;; urob home row mods template - left hand
+(deftemplate lhrm (tap-key hold-key)
+  (tap-hold-release-tap-keys-release
+    $tap-time
+    $hold-time
+    (multi $tap-key @tap)
+    $hold-key
+    $left-side-keys
+    $left-home-row-keys)
+)
+
+;; urob home row mods template - right hand
+(deftemplate rhrm (tap-key hold-key)
+  (tap-hold-release-tap-keys-release
+    $tap-time
+    $hold-time
+    (multi $tap-key @tap)
+    $hold-key
+    $right-side-keys
+    $right-home-row-keys)
+)
+
+(defvirtualkeys
+  to-base (layer-switch base)
 )
 
 (defalias
-  ;; define home row mods
-  a (tap-hold-release $tap-time $hold-time-long a lmet)
-  r (tap-hold-release $tap-time $hold-time-long r lalt)
-  s (tap-hold-release $tap-time $hold-time s lsft)
-  t (tap-hold-release $tap-time $hold-time t lctl)
+  tap (multi
+        (layer-switch nomods)
+        (on-idle $require-prior-idle tap-virtualkey to-base)
+  )
 
-  n (tap-hold-release $tap-time $hold-time n rctl)
-  e (tap-hold-release $tap-time $hold-time e rsft)
-  i (tap-hold-release $tap-time $hold-time-long i ralt)
-  o (tap-hold-release $tap-time $hold-time-long o rmet)
+  a (t! lhrm a lmet)
+  r (t! lhrm r lalt)
+  s (t! lhrm s lsft)
+  t (t! lhrm t lctl)
+
+  n (t! rhrm n rctl)
+  e (t! rhrm e rsft)
+  i (t! rhrm i ralt)
+  o (t! rhrm o rmet)
 
   ;; common actions
-  z (tap-hold $tap-time $hold-time-long z M-z)
-  x (tap-hold $tap-time $hold-time-long x M-x)
-  c (tap-hold $tap-time $hold-time-long c M-c)
-  v (tap-hold $tap-time $hold-time-long v M-v)
+  z (tap-hold $tap-time $hold-time z M-z)
+  x (tap-hold $tap-time $hold-time x M-x)
+  c (tap-hold $tap-time $hold-time c M-c)
+  v (tap-hold $tap-time $hold-time v M-v)
+
+  bsp (tap-hold 150 150 bspc A-bspc)
 
   ;; thumbs
-  spc (tap-hold-release $tap-time $hold-time spc (layer-while-held numpad))
+  spc (tap-hold-release $tap-time $hold-time
+                        (multi (layer-switch base) spc)
+                        (layer-while-held numpad))
   tmb (tap-hold-release $tap-time $hold-time
                         (one-shot $one-shot-time-long (layer-while-held extend))
                         (layer-while-held symbol))
