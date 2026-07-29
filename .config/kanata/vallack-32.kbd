@@ -1,0 +1,112 @@
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defalias
+  ! S-1
+  @ S-2
+  # S-3
+  $ S-4
+  % S-5
+  ^ S-6
+  & S-7
+  * S-8
+  lp S-9
+  rp S-0
+  _ S-min
+  + S-=
+  { S-[
+  } S-]
+  : S-;
+  | S-\
+  < S-,
+  > S-.
+  ? S-/
+  ~ S-`
+)
+
+;; physical layout of keys
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]   \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  `    z    x    c    v    b    n    m    ,    .    /    rsft
+       lalt lmet           spc            rmet ralt
+)
+
+(deflayer base
+  lrld 🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉   🔊
+  tab  q    w    f    p    b    XX   j    l    u    y    '    bspc ret
+  esc  a    @r   @s   @t   g    XX   m    @n   @e   @i   o    ret
+  @z   @x   @nc  @nd  v    XX   XX   k    @h   @,   @.   @qs
+       XX   XX             @spc           @sft XX
+)
+
+(deflayer symbol
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    `    @<   @>   @*   @|   XX   @^   @{   @}   @$   \    _    _
+  _    @!   min  @+   =    @&   XX   @_   @lp  @rp  ;    S-'  _
+  @~   [    ]    /    @%   XX   XX   @@   @:   ,    .    @#
+       XX   XX             _              _    XX
+)
+
+(deflayer number
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    XX   _    7    8    9    _    _    _
+  _    _    _    _    _    _    XX   _    4    5    6    _    _
+  _    _    _    _    _    XX   XX   _    1    2    3    _
+       XX   XX             _              0    XX
+)
+
+(deflayer navigation
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    XX   _    _    _    _    bspc _    _
+  _    tab  _    @bwd esc  _    XX   left down up   rght ret  _
+  _    _    _    _    _    XX   XX   home pgdn pgup end  _
+       XX   XX             _              _    XX
+)
+
+(defalias
+  r (tap-hold-release $tap-time $hold-time r lmet)
+  s (tap-hold-release $tap-time $hold-time s lalt)
+  t (tap-hold-release $tap-time $hold-time t lctl)
+
+  n (tap-hold-release $tap-time $hold-time n rctl)
+  e (tap-hold-release $tap-time $hold-time e ralt)
+  i (tap-hold-release $tap-time $hold-time i rmet)
+
+  z z
+  x x
+  nc (chord number-layer c)
+  nd (chord number-layer d)
+  c (tap-hold-release $tap-time $hold-time c (layer-while-held navigation))
+  d (tap-hold-release $tap-time $hold-time d (layer-while-held symbol))
+
+  h (tap-hold-release $tap-time $hold-time h (layer-while-held symbol))
+  , (tap-hold-release $tap-time $hold-time , (layer-while-held navigation))
+  . .
+  qs @?
+
+  bwd A-bspc ;; delete entire word (back-word)
+
+  meh (multi lctl lsft lalt)
+  spc (tap-hold-release $tap-time 60000 spc @meh)
+  sft (tap-dance $dance-time (
+            (one-shot $one-shot-time lsft)
+            caps))
+)
+
+(defchords number-layer $chord-time
+  (c  ) @c
+  (  d) @d
+  (c d) (layer-while-held number)
+)
+
+(defvar
+  tap-time 200
+  hold-time 200
+  one-shot-time 2000
+  dance-time 200
+  chord-time 40
+)
+
