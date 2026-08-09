@@ -1,0 +1,129 @@
+(defcfg
+  process-unmapped-keys yes
+  concurrent-tap-hold yes
+)
+
+;; physical layout of keys
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]   \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  `    z    x    c    v    b    n    m    ,    .    /    rsft
+       lalt lmet           spc            rmet ralt
+)
+
+;; symbol convenience aliases
+(defalias
+  ! S-1
+  @ S-2
+  # S-3
+  $ S-4
+  % S-5
+  ^ S-6
+  & S-7
+  * S-8
+  lp S-9
+  rp S-0
+  _ S-min
+  + S-=
+  { S-[
+  } S-]
+  : S-;
+  | S-\
+  < S-,
+  > S-.
+  ? S-/
+  ~ S-`
+)
+
+(deflayer base
+  lrld 🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉   🔊
+  tab  q    w    f    p    b    XX   j    l    u    y    '    bspc ret
+  esc  a    r    s    t    g    XX   m    n    e    i    o    ret
+      z    x    c    d   v   XX XX   k    h    ,    .    @?
+       lalt XX             spc            @tmb XX
+)
+
+(deflayer symbol
+  nop0 f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  tab  `    @<   @>   @*   @|   XX   @^   @{   @}   @$   \    bspc ret
+  esc  @!   min  @+   =    @&   XX   @_   @lp  @rp  ;    S-'  ret
+      @~   [    ]    /    @% XX XX   @@   @:   ,    .    @#
+       lalt XX             spc            nop0 XX
+)
+
+(deflayer numpad
+  lrld 🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉   🔊
+  tab  caps _    tab  esc  del  XX   _    7    8    9   _    bspc ret
+  esc  lmet lalt lsft lctl _    XX   _    4    5    6   0    ret
+      _    _    _    _    _  XX XX   _    1    2    3   _
+       lalt XX             bspc           nop0 XX
+)
+
+(deflayer navigation
+  lrld 🔅   🔆   f3   f4   f5   f6   ◀◀   ▶⏸   ▶▶   🔇   🔉   🔊
+  tab  _    @mwd @mmu @mwu _    XX   _    mlft mrgt @ac0 _    bspc ret
+  esc  _    @mml @mmd @mmr _    XX   rght down up   left _    ret
+      _    _    _    _    _  XX XX   home pgup pgdn end  _
+       lalt XX             nop0                             nop0 XX
+)
+
+;; home row mods parameters
+(defvar
+  tap-time 200
+  hold-time 200
+  dance-time 200
+  chord-time 32
+  one-shot-time 2000
+  one-shot-time-long 20000
+)
+
+(deftemplate chordv2-clutter ()
+  $chord-time all-released (symbol numpad navigation)
+)
+
+(defchordsv2
+  (a spc)    lmet                          (t! chordv2-clutter)
+  (s spc)    lalt                          (t! chordv2-clutter)
+  (d spc)    lsft                          (t! chordv2-clutter)
+  (f spc)    lctl                          (t! chordv2-clutter)
+  (k rmet)   rctl                          (t! chordv2-clutter)
+  (l rmet)   rsft                          (t! chordv2-clutter)
+  (; rmet)   ralt                          (t! chordv2-clutter)
+  (' rmet)   rmet                          (t! chordv2-clutter)
+  (m [)      (layer-while-held navigation) (t! chordv2-clutter)
+  (q v)      (layer-while-held navigation) (t! chordv2-clutter)
+  (spc rmet) (layer-while-held symbol)     (t! chordv2-clutter)
+)
+
+(deftemplate wm-num (number)
+  $number (tap-hold $tap-time $hold-time $number (concat A- $number))
+)
+
+(defalias
+  ;; thumbs
+  tmb (layer-while-held numpad)
+
+  ;; mouse
+  mwu (mwheel-up 50 120)
+  mwd (mwheel-down 50 120)
+
+  mmu (movemouse-up 2 2)
+  mmd (movemouse-down 2 2)
+  mml (movemouse-left 2 2)
+  mmr (movemouse-right 2 2)
+
+  ac0 (movemouse-speed 50)
+
+  ;; numbers with window management
+  (t! wm-num 0)
+  (t! wm-num 1)
+  (t! wm-num 2)
+  (t! wm-num 3)
+  (t! wm-num 4)
+  (t! wm-num 5)
+  (t! wm-num 6)
+  (t! wm-num 7)
+  (t! wm-num 8)
+  (t! wm-num 9)
+)

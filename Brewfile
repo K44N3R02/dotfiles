@@ -80,5 +80,6 @@ cask "aerospace"
 
 tap "FelixKratz/formulae"
 brew "sketchybar"
+brew "borders"
 
 cask "temurin@8"

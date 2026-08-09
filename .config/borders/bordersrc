@@ -2,9 +2,11 @@
 
 options=(
     style=round
-    width=2.0
+    width=4.0
     hidpi=on
-    active_color=0xff00ff00
+    active_color=0xff3e8fb0
+    # active_color=0xffea9a97
+    inactive_color=0xff6e6a86
     blacklist="MacVim"
 )
 
